@@ -11,11 +11,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 public class FudyShopApplication {
 
 	public static void main(String[] args) {
-		ConfigurableApplicationContext context = SpringApplication.run(FudyShopApplication.class, args);
-		String[] beanDefinitionNames = context.getBeanDefinitionNames();
-		for (String beanDefinitionName : beanDefinitionNames) {
-			System.out.println(beanDefinitionName);
-		}
+		SpringApplication.run(FudyShopApplication.class, args);
 	}
 
 }

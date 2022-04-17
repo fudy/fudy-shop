@@ -20,4 +20,11 @@ public class Result<T> implements Serializable {
         result.setData(t);
         return result;
     }
+
+    public static <T> Result<T> fail(String errMsg) {
+        Result<T> result = new Result();
+        result.setSuccess(false);
+        result.setErrMsg(errMsg);
+        return result;
+    }
 }

@@ -8,4 +8,5 @@ public class UserDO extends CommonDO {
     private String nickName;
     private String password;
     private String phone;
+    private String salt;
 }
