@@ -11,7 +11,9 @@ import org.springframework.context.ConfigurableApplicationContext;
 public class FudyShopApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(FudyShopApplication.class, args);
+		ConfigurableApplicationContext context = SpringApplication.run(FudyShopApplication.class, args);
+		String name = context.getEnvironment().getProperty("name");
+		System.out.println("name:"+name);
 	}
 
 }
