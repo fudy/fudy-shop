@@ -3,13 +3,16 @@ package com.fudy.shop.application;
 import com.fudy.shop.application.assembler.UserAssembler;
 import com.fudy.shop.application.repository.UserRepository;
 import com.fudy.shop.domain.user.User;
+import com.fudy.shop.interfaces.dto.SimpleUserDTO;
 import com.fudy.shop.interfaces.dto.UserDTO;
+import com.fudy.shop.interfaces.dto.UserLoginDTO;
 import org.apache.commons.codec.binary.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
+import java.util.Objects;
 
 @Validated
 @Service
@@ -37,5 +40,16 @@ public class UserManager {
         user.encryptPassword();
         user = userRepository.createUser(user);
         return userAssembler.toUserDTO(user);
+    }
+
+    public SimpleUserDTO login(@Valid UserLoginDTO dto) throws Exception {
+        User user = userRepository.getUser(dto.getUserName());
+        Objects.requireNonNull(user, "用户名和密码不正确");
+        boolean isValid = user.authenticate(dto.getUserName(), dto.getPassword());
+        if (!isValid) {
+            throw new Exception("用户名和密码不正确");
+        }
+        //TODO, 将用户相关信息存到session中
+        return userAssembler.toSimpleUserDTO(user);
     }
 }

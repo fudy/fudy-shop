@@ -30,4 +30,10 @@ public class UserRepositoryImpl implements UserRepository {
         userMapper.insert(userDO);
         return convertor.toUser(userDO);
     }
+
+    @Override
+    public User getUser(String username) {
+        UserDO userDO = userMapper.select(username);
+        return convertor.toUser(userDO);
+    }
 }

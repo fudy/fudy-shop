@@ -17,4 +17,11 @@ public class UserTest {
         user.encryptPassword();
         System.out.println(user.getPassword());
     }
+
+    @Test
+    public void testEncryptPassword2() {
+        User user = new User();
+        String encryptPassword = user.encryptPassword("gv0gdQkpHvBjGUHx", "A12345");
+        System.out.println(encryptPassword);
+    }
 }
