@@ -13,7 +13,7 @@ public class CaptchaFactory {
     @Value("${app.captcha.type}")
     private String type;
 
-    public CaptchaService getCaptchaService() {
-        return container.get(type);
+    public CaptchaService getCaptchaService(String type) {
+        return null != type ? container.get(type) : container.get(this.type);
     }
 }

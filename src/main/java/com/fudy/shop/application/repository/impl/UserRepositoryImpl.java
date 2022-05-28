@@ -1,6 +1,7 @@
 package com.fudy.shop.application.repository.impl;
 
 import com.fudy.shop.application.repository.UserRepository;
+import com.fudy.shop.application.repository.query.UserQuery;
 import com.fudy.shop.domain.user.User;
 import com.fudy.shop.infrastructure.db.convertor.UserConvertor;
 import com.fudy.shop.infrastructure.db.data.UserDO;
@@ -32,8 +33,13 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public User getUser(String username) {
-        UserDO userDO = userMapper.select(username);
+    public User getUser(UserQuery query) {
+        UserDO userDO = null;
+        if (null != query.getUsername()) {
+            userDO = userMapper.select(query.getUsername());
+        } else if (null != query.getPhone()) {
+            userDO = userMapper.selectByPhone(query.getPhone());
+        }
         return convertor.toUser(userDO);
     }
 }

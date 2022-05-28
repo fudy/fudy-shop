@@ -23,15 +23,16 @@ public class CaptchaManager {
     private CacheService cacheService;
 
     public void send(@Valid CaptchaDTO dto) throws Exception{
-        CaptchaService captchaService = captchaFactory.getCaptchaService();
+        CaptchaService captchaService = captchaFactory.getCaptchaService(dto.getType());
         Objects.requireNonNull(captchaService, "验证码服务未配置");
         Captcha captcha = new Captcha();
         captchaService.send(dto.getPhone(), captcha.getCode());
-        cacheService.write(CachePrefix.USER_REGISTRY, dto.getPhone(), captcha.getCode(), 3600);
+        cacheService.write(captchaService.getPrefix(), dto.getPhone(), captcha.getCode(), 3600);
     }
 
-    public boolean isValid(String phone, String captcha) {
-        String value = cacheService.read(CachePrefix.USER_REGISTRY, phone, String.class);
+    public boolean isValid(CachePrefix prefix, String phone, String captcha) {
+        String value = cacheService.read(prefix, phone, String.class);
         return StringUtils.equals(value, captcha);
     }
+
 }

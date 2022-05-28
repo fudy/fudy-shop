@@ -2,8 +2,11 @@ package com.fudy.shop.application;
 
 import com.fudy.shop.application.assembler.UserAssembler;
 import com.fudy.shop.application.repository.UserRepository;
+import com.fudy.shop.application.repository.query.UserQuery;
 import com.fudy.shop.domain.user.User;
+import com.fudy.shop.infrastructure.cache.CachePrefix;
 import com.fudy.shop.interfaces.dto.SimpleUserDTO;
+import com.fudy.shop.interfaces.dto.SmsUserLoginDTO;
 import com.fudy.shop.interfaces.dto.UserDTO;
 import com.fudy.shop.interfaces.dto.UserLoginDTO;
 import org.apache.commons.codec.binary.StringUtils;
@@ -28,7 +31,7 @@ public class UserManager {
         if (!StringUtils.equals(userDTO.getPassword(), userDTO.getConfirmPassword())) {
             throw new Exception("两次密码输入不一致！");
         }
-        if (!captchaManager.isValid(userDTO.getPhone(), userDTO.getCaptcha())) {
+        if (!captchaManager.isValid(CachePrefix.USER_REGISTRY, userDTO.getPhone(), userDTO.getCaptcha())) {
             throw new Exception("验证码不正确或已过期");
         }
     }
@@ -43,12 +46,27 @@ public class UserManager {
     }
 
     public SimpleUserDTO login(@Valid UserLoginDTO dto) throws Exception {
-        User user = userRepository.getUser(dto.getUserName());
+        UserQuery query = new UserQuery();
+        query.setUsername(dto.getUserName());
+        User user = userRepository.getUser(query);
         Objects.requireNonNull(user, "用户名和密码不正确");
         boolean isValid = user.authenticate(dto.getUserName(), dto.getPassword());
         if (!isValid) {
             throw new Exception("用户名和密码不正确");
         }
+        //TODO, 将用户相关信息存到session中
+        return userAssembler.toSimpleUserDTO(user);
+    }
+
+    public SimpleUserDTO smsLogin(@Valid SmsUserLoginDTO dto) throws Exception {
+        boolean isValid = captchaManager.isValid(CachePrefix.USER_LOGIN, dto.getPhone(), dto.getCaptcha());
+        if (!isValid) {
+            throw new Exception("手机号未注册或验证码不正确");
+        }
+        UserQuery query = new UserQuery();
+        query.setPhone(dto.getPhone());
+        User user = userRepository.getUser(query);
+        Objects.requireNonNull(user, "手机号未注册或验证码不正确");
         //TODO, 将用户相关信息存到session中
         return userAssembler.toSimpleUserDTO(user);
     }

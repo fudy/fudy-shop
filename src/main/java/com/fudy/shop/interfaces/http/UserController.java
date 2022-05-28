@@ -1,10 +1,7 @@
 package com.fudy.shop.interfaces.http;
 
 import com.fudy.shop.application.UserManager;
-import com.fudy.shop.interfaces.dto.Result;
-import com.fudy.shop.interfaces.dto.SimpleUserDTO;
-import com.fudy.shop.interfaces.dto.UserDTO;
-import com.fudy.shop.interfaces.dto.UserLoginDTO;
+import com.fudy.shop.interfaces.dto.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,6 +31,17 @@ public class UserController {
     public @ResponseBody Result<SimpleUserDTO> login(@RequestBody UserLoginDTO dto) {
         try {
             SimpleUserDTO data = userManager.login(dto);
+            return Result.success(data);
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return Result.fail(e.getMessage());
+        }
+    }
+
+    @PostMapping("/api/user/sms-login")
+    public @ResponseBody Result<SimpleUserDTO> smsLogin(@RequestBody SmsUserLoginDTO dto) {
+        try {
+            SimpleUserDTO data = userManager.smsLogin(dto);
             return Result.success(data);
         } catch (Exception e) {
             log.error(e.getMessage());

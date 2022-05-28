@@ -2,6 +2,7 @@ package com.fudy.shop.infrastructure.captcha;
 
 import com.alibaba.fastjson.JSON;
 import com.aliyun.dysmsapi20170525.models.SendSmsRequest;
+import com.fudy.shop.infrastructure.cache.CachePrefix;
 import com.fudy.shop.infrastructure.file.PrivateProperties;
 import com.fudy.shop.infrastructure.sms.AliyunSmsService;
 import org.springframework.stereotype.Service;
@@ -21,5 +22,10 @@ public class UserRegistryCaptchaService implements CaptchaService {
                 .setPhoneNumbers(PrivateProperties.getSmsTestPhone())
                 .setTemplateParam(JSON.toJSONString(templateParam));
         AliyunSmsService.sendSms(request);
+    }
+
+    @Override
+    public CachePrefix getPrefix() {
+        return CachePrefix.USER_REGISTRY;
     }
 }
