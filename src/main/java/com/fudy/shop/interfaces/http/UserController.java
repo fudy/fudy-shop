@@ -48,4 +48,15 @@ public class UserController {
             return Result.fail(e.getMessage());
         }
     }
+
+    @PostMapping("/api/user/password")
+    public @ResponseBody Result<Void> modifyPassword(@RequestBody ForgetPasswordDTO dto) {
+        try {
+            userManager.forgetPassword(dto);
+            return Result.success(null);
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return Result.fail(e.getMessage());
+        }
+    }
 }

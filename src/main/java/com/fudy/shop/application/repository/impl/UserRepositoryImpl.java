@@ -9,6 +9,8 @@ import com.fudy.shop.infrastructure.db.mybatis.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.Objects;
+
 @Repository
 public class UserRepositoryImpl implements UserRepository {
     @Autowired
@@ -41,5 +43,12 @@ public class UserRepositoryImpl implements UserRepository {
             userDO = userMapper.selectByPhone(query.getPhone());
         }
         return convertor.toUser(userDO);
+    }
+
+    @Override
+    public void updateUser(User user) throws Exception {
+        UserDO userDO = convertor.toUserDO(user);
+        Objects.requireNonNull(userDO, "user is null");
+        userMapper.update(userDO);
     }
 }

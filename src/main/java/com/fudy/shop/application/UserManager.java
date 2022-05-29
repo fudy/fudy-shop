@@ -5,10 +5,7 @@ import com.fudy.shop.application.repository.UserRepository;
 import com.fudy.shop.application.repository.query.UserQuery;
 import com.fudy.shop.domain.user.User;
 import com.fudy.shop.infrastructure.cache.CachePrefix;
-import com.fudy.shop.interfaces.dto.SimpleUserDTO;
-import com.fudy.shop.interfaces.dto.SmsUserLoginDTO;
-import com.fudy.shop.interfaces.dto.UserDTO;
-import com.fudy.shop.interfaces.dto.UserLoginDTO;
+import com.fudy.shop.interfaces.dto.*;
 import org.apache.commons.codec.binary.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -69,5 +66,24 @@ public class UserManager {
         Objects.requireNonNull(user, "手机号未注册或验证码不正确");
         //TODO, 将用户相关信息存到session中
         return userAssembler.toSimpleUserDTO(user);
+    }
+
+    public void forgetPassword(@Valid ForgetPasswordDTO dto) throws Exception{
+        if (!StringUtils.equals(dto.getPassword(), dto.getConfirmPassword())) {
+            throw new Exception("两次密码输入不一致！");
+        }
+        boolean isValid = captchaManager.isValid(CachePrefix.FORGET_PASSWORD, dto.getPhone(), dto.getCaptcha());
+        if (!isValid) {
+            throw new Exception("用户名不存在或验证码不正确");
+        }
+        UserQuery query = new UserQuery();
+        query.setUsername(dto.getUserName());
+        User user = userRepository.getUser(query);
+        Objects.requireNonNull(user, "用户名不存在或验证码不正确");
+        if (!StringUtils.equals(user.getPhone(), dto.getPhone())) {
+            throw new Exception("用户名和手机号不匹配");
+        }
+        user.setPassword(dto.getPassword());
+        userRepository.updateUser(user);
     }
 }

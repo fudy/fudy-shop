@@ -8,4 +8,6 @@ public interface UserRepository {
 
     User getUser(UserQuery query);
 
+    void updateUser(User user) throws Exception;
+
 }
