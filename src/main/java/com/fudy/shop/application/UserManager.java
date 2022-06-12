@@ -4,6 +4,8 @@ import com.fudy.shop.application.assembler.UserAssembler;
 import com.fudy.shop.application.repository.UserRepository;
 import com.fudy.shop.application.repository.query.UserQuery;
 import com.fudy.shop.domain.user.User;
+import com.fudy.shop.domain.user.session.HttpUserSession;
+import com.fudy.shop.domain.user.session.UserSession;
 import com.fudy.shop.infrastructure.cache.CachePrefix;
 import com.fudy.shop.interfaces.dto.*;
 import org.apache.commons.codec.binary.StringUtils;
@@ -11,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.Objects;
 
@@ -42,7 +45,7 @@ public class UserManager {
         return userAssembler.toUserDTO(user);
     }
 
-    public SimpleUserDTO login(@Valid UserLoginDTO dto) throws Exception {
+    public SimpleUserDTO login(@Valid UserLoginDTO dto, HttpSession httpSession) throws Exception {
         UserQuery query = new UserQuery();
         query.setUsername(dto.getUserName());
         User user = userRepository.getUser(query);
@@ -51,11 +54,12 @@ public class UserManager {
         if (!isValid) {
             throw new Exception("用户名和密码不正确");
         }
-        //TODO, 将用户相关信息存到session中
+        //将用户相关信息存到session中
+        this.getUserSession(httpSession).save(user);
         return userAssembler.toSimpleUserDTO(user);
     }
 
-    public SimpleUserDTO smsLogin(@Valid SmsUserLoginDTO dto) throws Exception {
+    public SimpleUserDTO smsLogin(@Valid SmsUserLoginDTO dto, HttpSession httpSession) throws Exception {
         boolean isValid = captchaManager.isValid(CachePrefix.USER_LOGIN, dto.getPhone(), dto.getCaptcha());
         if (!isValid) {
             throw new Exception("手机号未注册或验证码不正确");
@@ -64,7 +68,8 @@ public class UserManager {
         query.setPhone(dto.getPhone());
         User user = userRepository.getUser(query);
         Objects.requireNonNull(user, "手机号未注册或验证码不正确");
-        //TODO, 将用户相关信息存到session中
+        //将用户相关信息存到session中
+        this.getUserSession(httpSession).save(user);
         return userAssembler.toSimpleUserDTO(user);
     }
 
@@ -85,5 +90,14 @@ public class UserManager {
         }
         user.setPassword(dto.getPassword());
         userRepository.updateUser(user);
+    }
+
+    private UserSession getUserSession(HttpSession httpSession) {
+        return new HttpUserSession(httpSession);
+    }
+
+    public SimpleUserDTO getUser(HttpSession httpSession) {
+        UserSession userSession = this.getUserSession(httpSession);
+        return userAssembler.toSimpleUserDTO(userSession);
     }
 }
