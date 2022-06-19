@@ -26,6 +26,10 @@ public class User extends Entity {
         this.password = this.encryptPassword(this.password, this.salt);
     }
 
+    public void encryptPassword(String password) {
+        this.password = this.encryptPassword(password, this.salt);
+    }
+
     public String encryptPassword(String password, String salt) {
         String text = new StringBuilder(password).append(salt).toString();
         return SHA1Util.digest(text);

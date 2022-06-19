@@ -88,7 +88,7 @@ public class UserManager {
         if (!StringUtils.equals(user.getPhone(), dto.getPhone())) {
             throw new Exception("用户名和手机号不匹配");
         }
-        user.setPassword(dto.getPassword());
+        user.encryptPassword(dto.getPassword());
         userRepository.updateUser(user);
     }
 
