@@ -35,4 +35,5 @@ public class CaptchaManager {
         return StringUtils.equals(value, captcha);
     }
 
+
 }

@@ -8,4 +8,10 @@ public class RandomUtilTest {
         String s = RandomUtil.randomDigits(4);
         System.out.println(s);
     }
+
+    @Test
+    public void test2() {
+        String s = RandomUtil.randomStr(4);
+        System.out.println(s);
+    }
 }

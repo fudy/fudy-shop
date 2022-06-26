@@ -26,6 +26,8 @@ public class UserManager {
     private UserAssembler userAssembler;
     @Autowired
     private CaptchaManager captchaManager;
+    @Autowired
+    private ImageCaptchaManager imageCaptchaManager;
 
     private void validateCreateUserParam(UserDTO userDTO) throws Exception {
         if (!StringUtils.equals(userDTO.getPassword(), userDTO.getConfirmPassword())) {
@@ -46,6 +48,9 @@ public class UserManager {
     }
 
     public SimpleUserDTO login(@Valid UserLoginDTO dto, HttpSession httpSession) throws Exception {
+        if (!imageCaptchaManager.isValid(httpSession, dto.getImageCaptcha())) {
+            throw new Exception("图片验证码不正确");
+        }
         UserQuery query = new UserQuery();
         query.setUsername(dto.getUserName());
         User user = userRepository.getUser(query);

@@ -1,5 +1,7 @@
 package com.fudy.shop.infrastructure.common;
 
+import org.apache.commons.lang3.RandomStringUtils;
+
 public class RandomUtil {
     private static String DIGITS = "0123456789";
 
@@ -11,5 +13,9 @@ public class RandomUtil {
             rands[i] = DIGITS.charAt(rand);
         }
         return new String(rands);
+    }
+
+    public static String randomStr(int length) {
+        return RandomStringUtils.random(length, true, true);
     }
 }
