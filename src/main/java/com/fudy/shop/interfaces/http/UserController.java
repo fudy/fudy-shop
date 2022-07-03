@@ -42,6 +42,17 @@ public class UserController {
         }
     }
 
+    @PostMapping("/api/user/logout")
+    public @ResponseBody Result<Void> login() {
+        try {
+            userManager.logout(httpSession);
+            return Result.success(null);
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return Result.fail(e.getMessage());
+        }
+    }
+
     @PostMapping("/api/user/sms-login")
     public @ResponseBody Result<SimpleUserDTO> smsLogin(@RequestBody SmsUserLoginDTO dto) {
         try {

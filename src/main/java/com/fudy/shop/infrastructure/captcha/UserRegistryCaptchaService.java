@@ -1,20 +1,17 @@
 package com.fudy.shop.infrastructure.captcha;
 
-import com.alibaba.fastjson.JSON;
-import com.aliyun.dysmsapi20170525.models.SendSmsRequest;
 import com.fudy.shop.infrastructure.cache.CachePrefix;
-import com.fudy.shop.infrastructure.file.PrivateProperties;
-import com.fudy.shop.infrastructure.sms.AliyunSmsService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.Map;
-
 @Service("captcha-user-registry")
+@Slf4j
 public class UserRegistryCaptchaService implements CaptchaService {
 
     @Override
     public void send(String phone, String captcha) throws Exception {
+        log.warn("send user registry captcha, phone: {}, captcha: {}", phone, captcha);
+        /*
         Map<String, Object> templateParam = new HashMap<>();
         templateParam.put("code", captcha);
         SendSmsRequest request = new SendSmsRequest().setSignName("阿里云短信测试")
@@ -22,6 +19,7 @@ public class UserRegistryCaptchaService implements CaptchaService {
                 .setPhoneNumbers(PrivateProperties.getSmsTestPhone())
                 .setTemplateParam(JSON.toJSONString(templateParam));
         AliyunSmsService.sendSms(request);
+         */
     }
 
     @Override

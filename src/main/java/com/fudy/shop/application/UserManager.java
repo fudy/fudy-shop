@@ -61,7 +61,12 @@ public class UserManager {
         }
         //将用户相关信息存到session中
         this.getUserSession(httpSession).save(user);
+        imageCaptchaManager.clearImageCaptcha(httpSession);
         return userAssembler.toSimpleUserDTO(user);
+    }
+
+    public void logout(HttpSession httpSession) {
+        this.getUserSession(httpSession).invalidate();
     }
 
     public SimpleUserDTO smsLogin(@Valid SmsUserLoginDTO dto, HttpSession httpSession) throws Exception {

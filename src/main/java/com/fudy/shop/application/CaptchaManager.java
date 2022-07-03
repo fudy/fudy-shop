@@ -26,6 +26,12 @@ public class CaptchaManager {
         CaptchaService captchaService = captchaFactory.getCaptchaService(dto.getType());
         Objects.requireNonNull(captchaService, "验证码服务未配置");
         Captcha captcha = new Captcha();
+        //减少前端过于频繁地发送验证码
+        Boolean exist = cacheService.read(CachePrefix.LOCK, dto.getPhone(), Boolean.class);
+        if (Boolean.TRUE.equals(exist)) {
+            throw new Exception("验证码发送过于频繁！");
+        }
+        cacheService.write(CachePrefix.LOCK, dto.getPhone(), true, 60);
         captchaService.send(dto.getPhone(), captcha.getCode());
         cacheService.write(captchaService.getPrefix(), dto.getPhone(), captcha.getCode(), 3600);
     }

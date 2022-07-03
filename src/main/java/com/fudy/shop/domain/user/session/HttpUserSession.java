@@ -53,4 +53,8 @@ public class HttpUserSession implements UserSession {
         putPhone(user.getPhone());
         putNickName(user.getNickName());
     }
+
+    public void invalidate() {
+        httpSession.invalidate();
+    }
 }

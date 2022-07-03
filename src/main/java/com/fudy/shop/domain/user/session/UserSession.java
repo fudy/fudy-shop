@@ -13,4 +13,6 @@ public interface UserSession {
     String getNickName();
 
     void save(User user);
+
+    void invalidate();
 }

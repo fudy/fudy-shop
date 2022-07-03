@@ -2,6 +2,7 @@ package com.fudy.shop.infrastructure.cache;
 
 public enum CachePrefix {
     MOCK,
+    LOCK,
     USER_LOGIN,
     FORGET_PASSWORD,//忘记密码
     USER_REGISTRY; //用户注册

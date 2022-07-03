@@ -69,4 +69,7 @@ public class ImageCaptchaManager {
         return image;
     }
 
+    public void clearImageCaptcha(HttpSession httpSession) {
+        httpSession.removeAttribute(IMAGE_CAPTCHA_CODE);
+    }
 }
