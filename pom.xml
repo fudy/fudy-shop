@@ -6,6 +6,7 @@
 	<modules>
 		<module>fudy-shop-api</module>
 		<module>fudy-shop-main</module>
+		<module>fudy-shop-common</module>
 	</modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>

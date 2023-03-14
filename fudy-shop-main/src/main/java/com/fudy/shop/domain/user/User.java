@@ -1,5 +1,6 @@
 package com.fudy.shop.domain.user;
 
+import com.fudy.shop.domain.Entity;
 import com.fudy.shop.infrastructure.secure.SHA1Util;
 import lombok.Data;
 import org.apache.commons.codec.binary.Base64;

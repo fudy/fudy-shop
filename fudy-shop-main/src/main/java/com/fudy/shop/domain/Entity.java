@@ -1,4 +1,4 @@
-package com.fudy.shop.domain.user;
+package com.fudy.shop.domain;
 
 import lombok.Data;
 
