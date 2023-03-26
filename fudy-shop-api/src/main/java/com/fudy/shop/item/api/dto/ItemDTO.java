@@ -20,5 +20,7 @@ public class ItemDTO implements Serializable {
     private List<Map<String, List<Object>>> attributeList;
     //sku列表
     private List<ItemSkuDTO> skuList;
+    //商品详细描述
+    private String desc;
 
 }

@@ -10,4 +10,8 @@ public class ItemImage {
     public ItemImage(String image) {
         this.image = image;
     }
+
+    public String getImageUrl(String uriPrefix) {
+        return uriPrefix + image;
+    }
 }

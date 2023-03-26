@@ -6,7 +6,9 @@ import com.alibaba.fastjson.JSONObject;
 import com.fudy.shop.domain.item.*;
 import com.fudy.shop.infrastructure.db.data.ItemSkuDO;
 import com.fudy.shop.infrastructure.db.data.ItemSpuDO;
+import org.apache.commons.lang3.StringUtils;
 import org.mapstruct.Mapper;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -45,12 +47,13 @@ public interface ItemConvertor {
         if (null == imageList) {
             return null;
         }
-        JSONArray array = JSON.parseArray(imageList);
+        String[] imageArr = StringUtils.split(imageList, ",");
         List<ItemImage> list = new ArrayList<>();
-        for (Object image : array) {
-            list.add(new ItemImage((String)image));
+        for (String image : imageArr) {
+            list.add(new ItemImage(image));
         }
         return list;
     }
+
 
 }

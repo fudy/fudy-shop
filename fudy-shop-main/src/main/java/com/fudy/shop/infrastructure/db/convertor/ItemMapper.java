@@ -3,6 +3,7 @@ package com.fudy.shop.infrastructure.db.convertor;
 import com.fudy.shop.domain.item.ItemAttribute;
 import com.fudy.shop.domain.item.ItemImage;
 import com.fudy.shop.domain.item.ItemSkuSpec;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -10,6 +11,9 @@ import java.util.Map;
 
 @Component
 public class ItemMapper {
+    @Value("${app.image.uri.prefix}")
+    private String imageUriPrefix;
+
     public ItemAttribute toItemAttribute(Map<String, List<Object>> map) {
         ItemAttribute attribute = new ItemAttribute();
         attribute.setMap(map);
@@ -42,7 +46,7 @@ public class ItemMapper {
         if (null == itemImage) {
             return null;
         }
-        return itemImage.getImage();
+        return itemImage.getImageUrl(imageUriPrefix);
     }
 
 }

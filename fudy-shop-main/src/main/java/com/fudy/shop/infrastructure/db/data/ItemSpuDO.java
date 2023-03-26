@@ -18,5 +18,7 @@ public class ItemSpuDO extends CommonDO {
     private int status;
     //商品属性列表
     private String attributeList;
+    //销量
+    private int sales;
 
 }

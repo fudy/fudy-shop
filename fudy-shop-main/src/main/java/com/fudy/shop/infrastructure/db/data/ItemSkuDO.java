@@ -14,4 +14,6 @@ public class ItemSkuDO extends CommonDO {
     private BigDecimal price;
     //商品库存
     private int stock;
+    //商品sku图片
+    private String image;
 }

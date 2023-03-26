@@ -19,4 +19,6 @@ public class Item extends Entity {
     private List<ItemAttribute> attributeList;
     //sku列表
     private List<ItemSku> skuList;
+    //商品详细描述
+    private String desc;
 }
