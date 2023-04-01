@@ -1,6 +1,6 @@
 package com.fudy.shop.infrastructure.common;
 
-import com.fudy.shop.infrastructure.common.RandomUtil;
+import com.fudy.shop.domain.util.RandomUtil;
 import org.junit.jupiter.api.Test;
 
 public class RandomUtilTest {

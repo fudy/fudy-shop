@@ -7,6 +7,10 @@
 		<module>fudy-shop-api</module>
 		<module>fudy-shop-main</module>
 		<module>fudy-shop-common</module>
+        <module>fudy-shop-domain</module>
+		<module>fudy-shop-infrastructure</module>
+		<module>fudy-shop-application</module>
+		<module>fudy-shop-interfaces</module>
 	</modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -26,6 +30,36 @@
 	<dependencyManagement>
 
 		<dependencies>
+			<dependency>
+				<groupId>com.fudy</groupId>
+				<artifactId>fudy-shop-common</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>com.fudy</groupId>
+				<artifactId>fudy-shop-api</artifactId>
+				<version>1.0.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>com.fudy</groupId>
+				<artifactId>fudy-shop-domain</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>com.fudy</groupId>
+				<artifactId>fudy-shop-infrastructure</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>com.fudy</groupId>
+				<artifactId>fudy-shop-application</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>com.fudy</groupId>
+				<artifactId>fudy-shop-interfaces</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+			</dependency>
 
 			<!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-dependencies -->
 			<dependency>

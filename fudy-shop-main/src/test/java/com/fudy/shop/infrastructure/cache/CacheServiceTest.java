@@ -1,7 +1,5 @@
 package com.fudy.shop.infrastructure.cache;
 
-import com.fudy.shop.infrastructure.cache.CachePrefix;
-import com.fudy.shop.infrastructure.cache.CacheService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -2,7 +2,6 @@ package com.fudy.shop.infrastructure.sms;
 
 import com.aliyun.dysmsapi20170525.models.SendSmsRequest;
 import com.fudy.shop.infrastructure.file.PrivateProperties;
-import com.fudy.shop.infrastructure.sms.AliyunSmsService;
 import org.junit.jupiter.api.Test;
 
 public class AliyunSmsServiceTest {

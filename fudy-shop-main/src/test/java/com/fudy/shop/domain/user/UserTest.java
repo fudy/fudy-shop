@@ -1,6 +1,5 @@
 package com.fudy.shop.domain.user;
 
-import com.fudy.shop.domain.user.User;
 import org.junit.jupiter.api.Test;
 
 public class UserTest {

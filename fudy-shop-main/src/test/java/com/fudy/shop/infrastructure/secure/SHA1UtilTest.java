@@ -1,6 +1,6 @@
 package com.fudy.shop.infrastructure.secure;
 
-import com.fudy.shop.infrastructure.secure.SHA1Util;
+import com.fudy.shop.domain.util.SHA1Util;
 import org.junit.jupiter.api.Test;
 
 import java.security.NoSuchAlgorithmException;

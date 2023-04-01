@@ -1,6 +1,5 @@
 package com.fudy.shop.infrastructure.config;
 
-import com.fudy.shop.infrastructure.config.NacosConfig;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
