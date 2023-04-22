@@ -33,7 +33,7 @@
 			<dependency>
 				<groupId>com.fudy</groupId>
 				<artifactId>fudy-shop-common</artifactId>
-				<version>0.0.1-SNAPSHOT</version>
+				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.fudy</groupId>
@@ -43,22 +43,22 @@
 			<dependency>
 				<groupId>com.fudy</groupId>
 				<artifactId>fudy-shop-domain</artifactId>
-				<version>0.0.1-SNAPSHOT</version>
+				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.fudy</groupId>
 				<artifactId>fudy-shop-infrastructure</artifactId>
-				<version>0.0.1-SNAPSHOT</version>
+				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.fudy</groupId>
 				<artifactId>fudy-shop-application</artifactId>
-				<version>0.0.1-SNAPSHOT</version>
+				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.fudy</groupId>
 				<artifactId>fudy-shop-interfaces</artifactId>
-				<version>0.0.1-SNAPSHOT</version>
+				<version>${project.version}</version>
 			</dependency>
 
 			<!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-dependencies -->
@@ -75,6 +75,51 @@
 				<version>2021.0.4.0</version>
 				<type>pom</type>
 				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.mybatis.spring.boot</groupId>
+				<artifactId>mybatis-spring-boot-starter</artifactId>
+				<version>2.2.1</version>
+			</dependency>
+			<dependency>
+				<groupId>javax.validation</groupId>
+				<artifactId>validation-api</artifactId>
+				<version>2.0.1.Final</version>
+			</dependency>
+			<dependency>
+				<groupId>org.projectlombok</groupId>
+				<artifactId>lombok</artifactId>
+				<version>1.18.24</version>
+			</dependency>
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>fastjson</artifactId>
+				<version>1.2.79</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-lang3</artifactId>
+				<version>3.12.0</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-codec</groupId>
+				<artifactId>commons-codec</artifactId>
+				<version>1.11</version>
+			</dependency>
+			<dependency>
+				<groupId>com.aliyun</groupId>
+				<artifactId>dysmsapi20170525</artifactId>
+				<version>2.0.9</version>
+			</dependency>
+			<dependency>
+				<groupId>org.mapstruct</groupId>
+				<artifactId>mapstruct</artifactId>
+				<version>1.4.2.Final</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.dubbo</groupId>
+				<artifactId>dubbo-spring-boot-starter</artifactId>
+				<version>3.1.6</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

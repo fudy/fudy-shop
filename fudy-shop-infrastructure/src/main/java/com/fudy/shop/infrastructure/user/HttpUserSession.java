@@ -1,6 +1,7 @@
-package com.fudy.shop.domain.user.session;
+package com.fudy.shop.infrastructure.user;
 
 import com.fudy.shop.domain.user.User;
+import com.fudy.shop.domain.user.session.UserSession;
 
 import javax.servlet.http.HttpSession;
 

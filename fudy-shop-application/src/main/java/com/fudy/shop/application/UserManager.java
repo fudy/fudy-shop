@@ -1,13 +1,14 @@
 package com.fudy.shop.application;
 
 import com.fudy.shop.application.assembler.UserAssembler;
-import com.fudy.shop.application.dto.*;
 import com.fudy.shop.application.repository.UserRepository;
 import com.fudy.shop.domain.user.User;
-import com.fudy.shop.domain.user.session.HttpUserSession;
+import com.fudy.shop.infrastructure.user.HttpUserSession;
 import com.fudy.shop.domain.user.session.UserSession;
 import com.fudy.shop.application.repository.query.UserQuery;
 import com.fudy.shop.infrastructure.cache.CachePrefix;
+import com.fudy.shop.interfaces.dto.*;
+import com.fudy.shop.interfaces.manager.UserManagerInterface;
 import org.apache.commons.codec.binary.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,7 @@ import java.util.Objects;
 
 @Validated
 @Service
-public class UserManager {
+public class UserManager implements UserManagerInterface {
     @Autowired
     private UserRepository userRepository;
     @Autowired

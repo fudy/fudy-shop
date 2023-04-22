@@ -5,7 +5,8 @@ import com.fudy.shop.infrastructure.cache.CachePrefix;
 import com.fudy.shop.infrastructure.cache.CacheService;
 import com.fudy.shop.infrastructure.captcha.CaptchaFactory;
 import com.fudy.shop.infrastructure.captcha.CaptchaService;
-import com.fudy.shop.application.dto.CaptchaDTO;
+import com.fudy.shop.interfaces.dto.CaptchaDTO;
+import com.fudy.shop.interfaces.manager.CaptchaManagerInterface;
 import org.apache.commons.codec.binary.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,7 @@ import java.util.Objects;
 
 @Validated
 @Service
-public class CaptchaManager {
+public class CaptchaManager implements CaptchaManagerInterface {
     @Autowired
     private CaptchaFactory captchaFactory;
     @Autowired

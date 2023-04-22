@@ -1,14 +1,14 @@
 package com.fudy.shop.interfaces.http;
 
-import com.fudy.shop.application.CaptchaManager;
-import com.fudy.shop.application.ImageCaptchaManager;
+import com.fudy.shop.interfaces.dto.CaptchaDTO;
+import com.fudy.shop.interfaces.dto.Result;
+import com.fudy.shop.interfaces.dto.UserDTO;
+import com.fudy.shop.interfaces.manager.CaptchaManagerInterface;
+import com.fudy.shop.interfaces.manager.ImageCaptchaManagerInterface;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import com.fudy.shop.application.dto.CaptchaDTO;
-import com.fudy.shop.application.dto.Result;
-import com.fudy.shop.application.dto.UserDTO;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,9 +17,9 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 public class CaptchaController {
     @Autowired
-    private CaptchaManager captchaManager;
+    private CaptchaManagerInterface captchaManager;
     @Autowired
-    private ImageCaptchaManager imageCaptchaManager;
+    private ImageCaptchaManagerInterface imageCaptchaManager;
     @Autowired
     private HttpServletRequest request;
     @Autowired

@@ -16,6 +16,14 @@
             <groupId>com.fudy</groupId>
             <artifactId>fudy-shop-infrastructure</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.fudy</groupId>
+            <artifactId>fudy-shop-interfaces</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fudy</groupId>
+            <artifactId>fudy-shop-domain</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

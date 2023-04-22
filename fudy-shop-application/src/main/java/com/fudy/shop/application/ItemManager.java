@@ -3,6 +3,7 @@ package com.fudy.shop.application;
 import com.fudy.shop.application.assembler.ItemAssembler;
 import com.fudy.shop.application.repository.ItemRepository;
 import com.fudy.shop.domain.item.Item;
+import com.fudy.shop.interfaces.manager.ItemManagerInterface;
 import com.fudy.shop.item.api.dto.ItemDTO;
 import com.fudy.shop.item.api.dto.ItemQuery;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.Objects;
 
 @Service
-public class ItemManager {
+public class ItemManager implements ItemManagerInterface {
     @Autowired
     private ItemRepository repository;
     @Autowired

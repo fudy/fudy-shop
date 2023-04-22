@@ -1,9 +1,9 @@
 package com.fudy.shop.application.assembler;
 
-import com.fudy.shop.application.dto.UserDTO;
+import com.fudy.shop.interfaces.dto.UserDTO;
 import com.fudy.shop.domain.user.User;
 import com.fudy.shop.domain.user.session.UserSession;
-import com.fudy.shop.application.dto.SimpleUserDTO;
+import com.fudy.shop.interfaces.dto.SimpleUserDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
