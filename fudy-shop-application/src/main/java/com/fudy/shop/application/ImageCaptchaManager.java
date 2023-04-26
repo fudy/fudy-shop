@@ -1,6 +1,7 @@
 package com.fudy.shop.application;
 
 import com.fudy.shop.domain.util.RandomUtil;
+import com.fudy.shop.interfaces.manager.ImageCaptchaManagerInterface;
 import org.apache.commons.codec.binary.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
@@ -16,7 +17,7 @@ import java.util.Random;
 
 @Validated
 @Service
-public class ImageCaptchaManager {
+public class ImageCaptchaManager implements ImageCaptchaManagerInterface {
     /** 验证码长度 */
     public static final int LENGTH = 4;
     /** 图片宽度 */
