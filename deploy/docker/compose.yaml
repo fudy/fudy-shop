@@ -1,0 +1,16 @@
+version: '3.5'
+services:
+  fudy-shop:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: fudy-shop
+    ports:
+      - 8888:8888
+    networks:
+      - fudy-network
+    volumes:
+      - /opt/docker/fudy-shop/:/opt/fudy-shop
+      - /opt/docker/fudy-shop/log:/Users/fudy/logs
+networks:
+  fudy-network:
