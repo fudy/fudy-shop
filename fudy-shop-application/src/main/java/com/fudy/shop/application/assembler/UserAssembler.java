@@ -1,13 +1,12 @@
 package com.fudy.shop.application.assembler;
 
-import com.fudy.shop.interfaces.dto.UserDTO;
+import com.fudy.shop.application.dto.SimpleUserDTO;
+import com.fudy.shop.application.dto.UserDTO;
 import com.fudy.shop.domain.user.User;
 import com.fudy.shop.domain.user.session.UserSession;
-import com.fudy.shop.interfaces.dto.SimpleUserDTO;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = UserMapper.class)
 public interface UserAssembler {
     User toUser(UserDTO userDTO);
 
@@ -15,6 +14,11 @@ public interface UserAssembler {
 
     SimpleUserDTO toSimpleUserDTO(User user);
 
-    @Mapping(target="id", source="userSession.userId")
-    SimpleUserDTO toSimpleUserDTO(UserSession userSession);
+    default SimpleUserDTO toSimpleUserDTO(UserSession userSession) {
+        SimpleUserDTO dto = new SimpleUserDTO();
+        dto.setUserName(userSession.getUserName());
+        dto.setId(null == userSession.getUserId() ? null : String.valueOf(userSession.getUserId()));
+        dto.setNickName(userSession.getNickName());
+        return dto;
+    }
 }

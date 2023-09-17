@@ -12,17 +12,34 @@
     <artifactId>fudy-shop-application</artifactId>
 
     <dependencies>
-        <dependency>
-            <groupId>com.fudy</groupId>
-            <artifactId>fudy-shop-infrastructure</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.fudy</groupId>
-            <artifactId>fudy-shop-interfaces</artifactId>
-        </dependency>
+        <!-- 子模块 -->
         <dependency>
             <groupId>com.fudy</groupId>
             <artifactId>fudy-shop-domain</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fudy</groupId>
+            <artifactId>fudy-shop-api</artifactId>
+        </dependency>
+        <!-- web -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <!-- 参数校验 -->
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+        </dependency>
+        <!-- 类转换 -->
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct</artifactId>
+        </dependency>
+        <!-- spring -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
         </dependency>
     </dependencies>
 

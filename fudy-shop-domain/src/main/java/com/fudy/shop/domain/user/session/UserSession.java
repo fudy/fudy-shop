@@ -1,18 +1,42 @@
 package com.fudy.shop.domain.user.session;
 
-import com.fudy.shop.domain.user.User;
+import com.fudy.shop.domain.user.*;
+import lombok.Data;
+import lombok.NonNull;
+import lombok.experimental.Accessors;
 
-public interface UserSession {
+@Data
+@Accessors(chain = true)
+public class UserSession {
+    private UserName userName;
+    private UserId userId;
+    private PhoneNumber phone;
+    private NickName nickName;
 
-    Long getUserId();
+    public UserSession(@NonNull User user) {
+        this.userName = user.getUserName();
+        this.userId = new UserId(user.getId());
+        this.phone = user.getPhone();
+        this.nickName = user.getNickName();
+    }
 
-    String getUserName();
+    public UserSession() {
+    }
 
-    String getPhone();
+    public Long getUserId() {
+        return null == userId ? null : userId.getValue();
+    }
 
-    String getNickName();
+    public String getUserName() {
+        return null == userName ? null : userName.getValue();
+    }
 
-    void save(User user);
+    public String getPhone() {
+        return null == phone ? null : phone.getValue();
+    }
 
-    void invalidate();
+    public String getNickName() {
+        return null == nickName ? null : nickName.getNickName();
+    }
+
 }

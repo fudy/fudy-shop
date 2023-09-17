@@ -1,7 +1,7 @@
 package com.fudy.shop.interfaces.http;
 
-import com.fudy.shop.interfaces.dto.*;
-import com.fudy.shop.interfaces.manager.UserManagerInterface;
+import com.fudy.shop.application.UserManager;
+import com.fudy.shop.application.dto.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class UserController {
     @Autowired
-    private UserManagerInterface userManager;
+    private UserManager userManager;
     @Autowired
     private HttpSession httpSession;
 

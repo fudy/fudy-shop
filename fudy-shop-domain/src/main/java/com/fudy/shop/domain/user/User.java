@@ -1,52 +1,48 @@
 package com.fudy.shop.domain.user;
 
 import com.fudy.shop.domain.Entity;
+import com.fudy.shop.domain.captcha.Captcha;
 import com.fudy.shop.domain.util.SHA1Util;
 import lombok.Data;
 import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.codec.binary.StringUtils;
 
 import java.security.SecureRandom;
 import java.util.Random;
 
 @Data
 public class User extends Entity {
-    private String userName;
+    private UserName userName;
 
-    private String nickName;
+    private NickName nickName;
 
-    private String password;
+    private Password password;
 
-    private String phone;
+    private PhoneNumber phone;
 
-    private String captcha;
+    private Captcha captcha;
     //用于密码加盐
-    private String salt;
+    private PasswordSalt salt;
 
-    public void encryptPassword() {
-        this.password = this.encryptPassword(this.password, this.salt);
-    }
-
-    public void encryptPassword(String password) {
-        this.password = this.encryptPassword(password, this.salt);
-    }
-
-    public String encryptPassword(String password, String salt) {
-        String text = new StringBuilder(password).append(salt).toString();
-        return SHA1Util.digest(text);
-    }
-
-    public boolean authenticate(String userName, String password) {
+    public boolean authenticate(UserName userName, Password password) {
         if (!this.userName.equals(userName)) {
             return false;
         }
-        String encryptPassword = this.encryptPassword(password, this.salt);
-        return this.password.equals(encryptPassword);
+        String encryptPassword = password.getEncryptedPassword(this.salt);
+        return this.password.getEncryptedPassword(this.salt).equals(encryptPassword);
     }
 
     public void generateSalt() {
         final Random r = new SecureRandom();
         byte[] salt = new byte[12];
         r.nextBytes(salt);
-        this.salt = Base64.encodeBase64String(salt);
+        this.salt = new PasswordSalt(Base64.encodeBase64String(salt));
+    }
+
+    public boolean phoneNumberEquals(PhoneNumber phoneNumber) {
+        if (null == this.phone || null == phoneNumber) {
+            return false;
+        }
+        return this.phone.equals(phoneNumber);
     }
 }

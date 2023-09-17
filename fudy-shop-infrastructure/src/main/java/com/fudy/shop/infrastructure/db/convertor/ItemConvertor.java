@@ -3,6 +3,7 @@ package com.fudy.shop.infrastructure.db.convertor;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.fudy.shop.application.assembler.ItemMapper;
 import com.fudy.shop.domain.item.*;
 import com.fudy.shop.infrastructure.db.data.ItemSkuDO;
 import com.fudy.shop.infrastructure.db.data.ItemSpuDO;

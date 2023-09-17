@@ -1,6 +1,5 @@
 package com.fudy.shop.application.assembler;
 
-import com.fudy.shop.infrastructure.db.convertor.ItemMapper;
 import com.fudy.shop.domain.item.Item;
 import com.fudy.shop.domain.item.ItemSku;
 import com.fudy.shop.item.api.dto.ItemDTO;

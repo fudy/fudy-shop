@@ -1,14 +1,13 @@
 package com.fudy.shop.application;
 
 import com.fudy.shop.application.assembler.UserAssembler;
-import com.fudy.shop.application.repository.UserRepository;
-import com.fudy.shop.domain.user.User;
-import com.fudy.shop.infrastructure.user.HttpUserSession;
+import com.fudy.shop.application.dto.*;
+import com.fudy.shop.domain.cache.CachePrefix;
+import com.fudy.shop.domain.captcha.CaptchaService;
+import com.fudy.shop.domain.repository.UserSessionRepository;
+import com.fudy.shop.domain.repository.UserSessionRepositoryFactory;
+import com.fudy.shop.domain.user.*;
 import com.fudy.shop.domain.user.session.UserSession;
-import com.fudy.shop.application.repository.query.UserQuery;
-import com.fudy.shop.infrastructure.cache.CachePrefix;
-import com.fudy.shop.interfaces.dto.*;
-import com.fudy.shop.interfaces.manager.UserManagerInterface;
 import org.apache.commons.codec.binary.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,21 +19,23 @@ import java.util.Objects;
 
 @Validated
 @Service
-public class UserManager implements UserManagerInterface {
+public class UserManager  {
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
     @Autowired
     private UserAssembler userAssembler;
     @Autowired
-    private CaptchaManager captchaManager;
+    private CaptchaService captchaService;
     @Autowired
     private ImageCaptchaManager imageCaptchaManager;
+    @Autowired
+    private UserSessionRepositoryFactory<HttpSession> userSessionRepositoryFactory;
 
     private void validateCreateUserParam(UserDTO userDTO) throws Exception {
         if (!StringUtils.equals(userDTO.getPassword(), userDTO.getConfirmPassword())) {
             throw new Exception("两次密码输入不一致！");
         }
-        if (!captchaManager.isValid(CachePrefix.USER_REGISTRY, userDTO.getPhone(), userDTO.getCaptcha())) {
+        if (!captchaService.isValid(CachePrefix.USER_REGISTRY, userDTO.getPhone(), userDTO.getCaptcha())) {
             throw new Exception("验证码不正确或已过期");
         }
     }
@@ -42,9 +43,7 @@ public class UserManager implements UserManagerInterface {
     public UserDTO createUser(@Valid UserDTO userDTO) throws Exception {
         validateCreateUserParam(userDTO);
         User user = userAssembler.toUser(userDTO);
-        user.generateSalt();
-        user.encryptPassword();
-        user = userRepository.createUser(user);
+        user = userService.saveUser(user);
         return userAssembler.toUserDTO(user);
     }
 
@@ -52,35 +51,26 @@ public class UserManager implements UserManagerInterface {
         if (!imageCaptchaManager.isValid(httpSession, dto.getImageCaptcha())) {
             throw new Exception("图片验证码不正确");
         }
-        UserQuery query = new UserQuery();
-        query.setUsername(dto.getUserName());
-        User user = userRepository.getUser(query);
-        Objects.requireNonNull(user, "用户名和密码不正确");
-        boolean isValid = user.authenticate(dto.getUserName(), dto.getPassword());
-        if (!isValid) {
-            throw new Exception("用户名和密码不正确");
-        }
+        User user = userService.login(new UserName(dto.getUserName()), new Password(dto.getPassword()));
         //将用户相关信息存到session中
-        this.getUserSession(httpSession).save(user);
+        this.getUserSessionRepository(httpSession).save(new UserSession(user));
         imageCaptchaManager.clearImageCaptcha(httpSession);
         return userAssembler.toSimpleUserDTO(user);
     }
 
     public void logout(HttpSession httpSession) {
-        this.getUserSession(httpSession).invalidate();
+        this.getUserSessionRepository(httpSession).invalidate();
     }
 
     public SimpleUserDTO smsLogin(@Valid SmsUserLoginDTO dto, HttpSession httpSession) throws Exception {
-        boolean isValid = captchaManager.isValid(CachePrefix.USER_LOGIN, dto.getPhone(), dto.getCaptcha());
+        boolean isValid = captchaService.isValid(CachePrefix.USER_LOGIN, dto.getPhone(), dto.getCaptcha());
         if (!isValid) {
             throw new Exception("手机号未注册或验证码不正确");
         }
-        UserQuery query = new UserQuery();
-        query.setPhone(dto.getPhone());
-        User user = userRepository.getUser(query);
+        User user = userService.getUser(new PhoneNumber(dto.getPhone()));
         Objects.requireNonNull(user, "手机号未注册或验证码不正确");
         //将用户相关信息存到session中
-        this.getUserSession(httpSession).save(user);
+        this.getUserSessionRepository(httpSession).save(new UserSession(user));
         return userAssembler.toSimpleUserDTO(user);
     }
 
@@ -88,27 +78,25 @@ public class UserManager implements UserManagerInterface {
         if (!StringUtils.equals(dto.getPassword(), dto.getConfirmPassword())) {
             throw new Exception("两次密码输入不一致！");
         }
-        boolean isValid = captchaManager.isValid(CachePrefix.FORGET_PASSWORD, dto.getPhone(), dto.getCaptcha());
+        boolean isValid = captchaService.isValid(CachePrefix.FORGET_PASSWORD, dto.getPhone(), dto.getCaptcha());
         if (!isValid) {
             throw new Exception("用户名不存在或验证码不正确");
         }
-        UserQuery query = new UserQuery();
-        query.setUsername(dto.getUserName());
-        User user = userRepository.getUser(query);
+        User user = userService.getUser(new UserName(dto.getUserName()));
         Objects.requireNonNull(user, "用户名不存在或验证码不正确");
-        if (!StringUtils.equals(user.getPhone(), dto.getPhone())) {
+        if (!user.phoneNumberEquals(new PhoneNumber(dto.getPhone()))) {
             throw new Exception("用户名和手机号不匹配");
         }
-        user.encryptPassword(dto.getPassword());
-        userRepository.updateUser(user);
+        user.generateSalt();
+        userService.saveUser(user);
     }
 
-    private UserSession getUserSession(HttpSession httpSession) {
-        return new HttpUserSession(httpSession);
+    private UserSessionRepository getUserSessionRepository(HttpSession httpSession) {
+        return userSessionRepositoryFactory.newUserSessionRepository(httpSession);
     }
 
     public SimpleUserDTO getUser(HttpSession httpSession) {
-        UserSession userSession = this.getUserSession(httpSession);
+        UserSession userSession = this.getUserSessionRepository(httpSession).getUserSession();
         return userAssembler.toSimpleUserDTO(userSession);
     }
 }

@@ -1,5 +1,7 @@
 package com.fudy.shop.infrastructure.cache;
 
+import com.fudy.shop.domain.cache.CachePrefix;
+import com.fudy.shop.domain.cache.CacheService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.data.redis.core.RedisTemplate;
