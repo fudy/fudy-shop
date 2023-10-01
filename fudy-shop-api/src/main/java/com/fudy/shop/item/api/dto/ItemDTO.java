@@ -8,6 +8,7 @@ import java.util.Map;
 @Data
 public class ItemDTO implements Serializable {
     private static final long serialVersionUID = 1365193080350363921L;
+    private Long id;
     //商品标题
     private String title;
     //商品主图

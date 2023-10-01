@@ -6,7 +6,7 @@ import com.fudy.shop.domain.user.User;
 import com.fudy.shop.domain.user.session.UserSession;
 import org.mapstruct.Mapper;
 
-@Mapper(componentModel = "spring", uses = UserMapper.class)
+@Mapper(componentModel = "spring", uses = UserCommonConvertor.class)
 public interface UserAssembler {
     User toUser(UserDTO userDTO);
 

@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 @Component
-public class ItemMapper {
+public class ItemCommonConverter {
     @Value("${app.image.uri.prefix}")
     private String imageUriPrefix;
 

@@ -2,8 +2,10 @@ package com.fudy.shop.application.assembler;
 
 import com.fudy.shop.domain.captcha.Captcha;
 import com.fudy.shop.domain.user.*;
+import org.springframework.stereotype.Component;
 
-public class UserMapper {
+@Component
+public class UserCommonConvertor {
     public UserName toUserName(String username) {
         return new UserName(username);
     }

@@ -1,5 +1,6 @@
 package com.fudy.shop.infrastructure.db.repository;
 
+import com.fudy.shop.domain.repository.ItemRepository;
 import com.fudy.shop.infrastructure.db.convertor.ItemConvertor;
 import com.fudy.shop.domain.item.Item;
 import com.fudy.shop.domain.item.ItemSku;
@@ -13,7 +14,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class ItemRepositoryImpl {
+public class ItemRepositoryImpl implements ItemRepository {
     @Autowired
     private ItemSpuMapper itemSpuMapper;
     @Autowired

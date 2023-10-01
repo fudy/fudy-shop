@@ -11,13 +11,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class CaptchaService {
     public static final int DEFAULT_SIZE = 4;
-    private CaptchaSender captchaSender;
     private CacheService cacheService;
     private CaptchaFactory captchaFactory;
 
     @Autowired
-    public CaptchaService(CaptchaSender captchaSender, CacheService cacheService,CaptchaFactory captchaFactory) {
-        this.captchaSender = captchaSender;
+    public CaptchaService(CacheService cacheService,CaptchaFactory captchaFactory) {
         this.cacheService = cacheService;
         this.captchaFactory = captchaFactory;
     }
