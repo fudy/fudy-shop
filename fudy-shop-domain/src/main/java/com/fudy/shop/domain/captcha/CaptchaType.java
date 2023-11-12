@@ -13,10 +13,14 @@ public enum CaptchaType {
 
     public static CaptchaType of(String type) {
         for (CaptchaType ct : CaptchaType.values()) {
-            if (ct.equals(type)) {
+            if (ct.value.equals(type)) {
                 return ct;
             }
         }
         return null;
+    }
+
+    public String getValue() {
+        return this.value;
     }
 }
