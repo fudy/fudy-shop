@@ -9,4 +9,5 @@ public class UserDO extends CommonDO {
     private String password;
     private String phone;
     private String salt;
+    private String avatar;
 }

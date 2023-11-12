@@ -24,6 +24,8 @@ public class User extends Entity {
     //用于密码加盐
     private PasswordSalt salt;
 
+    private Avatar avatar;
+
     public boolean authenticate(UserName userName, Password password) {
         if (!this.userName.equals(userName)) {
             return false;

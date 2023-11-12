@@ -2,10 +2,14 @@ package com.fudy.shop.application.assembler;
 
 import com.fudy.shop.domain.captcha.Captcha;
 import com.fudy.shop.domain.user.*;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
 public class UserCommonConvertor {
+    @Value("${app.avatar.uri.prefix}")
+    private String avatarUriPrefix;
+
     public UserName toUserName(String username) {
         return new UserName(username);
     }
@@ -52,5 +56,13 @@ public class UserCommonConvertor {
 
     public String toNickName(NickName nickName) {
         return null == nickName ? null : nickName.getNickName();
+    }
+
+    public Avatar toAvatar(String avatar) {
+        return new Avatar(avatar);
+    }
+
+    public String toAvatar(Avatar avatar) {
+        return null == avatar ? null : avatar.getAvatarUrl(avatarUriPrefix);
     }
 }

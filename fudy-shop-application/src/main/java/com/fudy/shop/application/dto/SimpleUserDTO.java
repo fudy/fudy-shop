@@ -13,4 +13,6 @@ public class SimpleUserDTO implements Serializable {
     private String userName;
 
     private String nickName;
+
+    private String avatar;
 }
