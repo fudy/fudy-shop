@@ -87,7 +87,6 @@ public class UserManager  {
         if (!user.phoneNumberEquals(new PhoneNumber(dto.getPhone()))) {
             throw new Exception("用户名和手机号不匹配");
         }
-        user.generateSalt();
         userService.saveUser(user);
     }
 

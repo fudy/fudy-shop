@@ -15,7 +15,7 @@ public class UserService {
     }
 
     public User saveUser(@NonNull User user) throws Exception {
-        user.generateSalt();
+        user.encryptPassword();
         return userRepository.saveUser(user);
     }
 

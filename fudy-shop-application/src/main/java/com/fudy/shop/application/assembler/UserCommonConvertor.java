@@ -59,7 +59,7 @@ public class UserCommonConvertor {
     }
 
     public Avatar toAvatar(String avatar) {
-        return new Avatar(avatar);
+        return null == avatar ? null : new Avatar(avatar);
     }
 
     public String toAvatar(Avatar avatar) {

@@ -31,14 +31,22 @@ public class User extends Entity {
             return false;
         }
         String encryptPassword = password.getEncryptedPassword(this.salt);
-        return this.password.getEncryptedPassword(this.salt).equals(encryptPassword);
+        return this.password.getValue().equals(encryptPassword);
     }
 
-    public void generateSalt() {
+    public void encryptPassword() {
+        if (null == password) {
+            return;
+        }
+        this.salt = generateSalt();
+        password.encrypt(salt);
+    }
+
+    private PasswordSalt generateSalt() {
         final Random r = new SecureRandom();
         byte[] salt = new byte[12];
         r.nextBytes(salt);
-        this.salt = new PasswordSalt(Base64.encodeBase64String(salt));
+        return new PasswordSalt(Base64.encodeBase64String(salt));
     }
 
     public boolean phoneNumberEquals(PhoneNumber phoneNumber) {
