@@ -1,10 +1,11 @@
 <html>
     <head>
         <title>Fudy Shop</title>
+        <link th:each="css : ${cssFiles}"  th:href="@{./assets/} + ${css}" rel="stylesheet" type="text/css" />
+
     </head>
     <body style="background-color:#eaeaea">
         <div id="app"></div>
-        <h1 th:text="${message}"></h1>
-        <script type="module" th:src="${jsFileURL}"></script>
+        <script type="module" th:each="js : ${jsFiles}" th:src="@{./assets/} + ${js}"></script>
     </body>
 </html>
