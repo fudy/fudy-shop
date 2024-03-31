@@ -9,4 +9,8 @@ public class UserId {
     public UserId(Long value) {
         this.value = value;
     }
+
+    public UserId(String value) {
+        this.value = Long.parseLong(value);
+    }
 }
