@@ -2,7 +2,7 @@ package com.fudy.shop.application;
 
 import com.fudy.shop.application.assembler.ItemAssembler;
 import com.fudy.shop.domain.repository.ItemRepository;
-import com.fudy.shop.domain.item.Item;
+import com.fudy.shop.domain.modal.item.Item;
 import com.fudy.shop.item.api.dto.ItemDTO;
 import com.fudy.shop.item.api.dto.ItemQuery;
 import org.springframework.beans.factory.annotation.Autowired;

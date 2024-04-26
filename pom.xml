@@ -121,6 +121,12 @@
 				<artifactId>dubbo-spring-boot-starter</artifactId>
 				<version>3.1.6</version>
 			</dependency>
+			<!-- 雪花ID算法 -->
+			<dependency>
+				<groupId>cn.hutool</groupId>
+				<artifactId>hutool-all</artifactId>
+				<version>5.8.27</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 	<build>

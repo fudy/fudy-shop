@@ -1,8 +1,8 @@
 package com.fudy.shop.application.assembler;
 
-import com.fudy.shop.domain.item.ItemAttribute;
-import com.fudy.shop.domain.item.ItemImage;
-import com.fudy.shop.domain.item.ItemSkuSpec;
+import com.fudy.shop.domain.modal.item.ItemAttribute;
+import com.fudy.shop.domain.modal.item.ItemImage;
+import com.fudy.shop.domain.modal.item.ItemSkuSpec;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 

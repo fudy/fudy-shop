@@ -2,8 +2,8 @@ package com.fudy.shop.infrastructure.db.repository;
 
 import com.fudy.shop.domain.repository.ItemRepository;
 import com.fudy.shop.infrastructure.db.convertor.ItemConvertor;
-import com.fudy.shop.domain.item.Item;
-import com.fudy.shop.domain.item.ItemSku;
+import com.fudy.shop.domain.modal.item.Item;
+import com.fudy.shop.domain.modal.item.ItemSku;
 import com.fudy.shop.infrastructure.db.data.ItemSkuDO;
 import com.fudy.shop.infrastructure.db.data.ItemSpuDO;
 import com.fudy.shop.infrastructure.db.mybatis.mapper.ItemSkuMapper;

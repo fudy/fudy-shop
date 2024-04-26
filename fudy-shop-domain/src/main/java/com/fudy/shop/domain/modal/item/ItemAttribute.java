@@ -1,4 +1,4 @@
-package com.fudy.shop.domain.item;
+package com.fudy.shop.domain.modal.item;
 
 import com.alibaba.fastjson.JSONObject;
 import lombok.Data;
