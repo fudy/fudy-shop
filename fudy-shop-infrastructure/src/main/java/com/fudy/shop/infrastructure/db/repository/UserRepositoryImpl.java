@@ -2,17 +2,15 @@ package com.fudy.shop.infrastructure.db.repository;
 
 import com.fudy.shop.domain.repository.UserRepository;
 import com.fudy.shop.domain.repository.query.UserQuery;
-import com.fudy.shop.domain.user.PhoneNumber;
-import com.fudy.shop.domain.user.UserName;
+import com.fudy.shop.domain.modal.user.PhoneNumber;
+import com.fudy.shop.domain.modal.user.UserName;
 import com.fudy.shop.infrastructure.db.convertor.UserConvertor;
 import com.fudy.shop.infrastructure.db.data.UserDO;
-import com.fudy.shop.domain.user.User;
+import com.fudy.shop.domain.modal.user.User;
 import com.fudy.shop.infrastructure.db.mybatis.mapper.UserMapper;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import java.util.Objects;
 
 @Repository
 public class UserRepositoryImpl implements UserRepository {

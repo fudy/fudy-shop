@@ -1,6 +1,6 @@
-package com.fudy.shop.domain.user;
+package com.fudy.shop.domain.modal.user;
 
-import com.fudy.shop.domain.Entity;
+import com.fudy.shop.domain.modal.Entity;
 import lombok.Data;
 
 @Data

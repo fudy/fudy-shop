@@ -1,5 +1,9 @@
-package com.fudy.shop.domain.user;
+package com.fudy.shop.domain.service;
 
+import com.fudy.shop.domain.modal.user.Password;
+import com.fudy.shop.domain.modal.user.PhoneNumber;
+import com.fudy.shop.domain.modal.user.User;
+import com.fudy.shop.domain.modal.user.UserName;
 import com.fudy.shop.domain.repository.UserRepository;
 import lombok.NonNull;
 import org.springframework.stereotype.Service;

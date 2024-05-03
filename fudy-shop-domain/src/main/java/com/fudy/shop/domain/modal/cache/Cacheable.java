@@ -1,4 +1,4 @@
-package com.fudy.shop.domain.cache;
+package com.fudy.shop.domain.modal.cache;
 
 public interface Cacheable {
     CachePrefix getCachePrefix();

@@ -1,7 +1,7 @@
 package com.fudy.shop.application.assembler;
 
 import com.fudy.shop.application.dto.UserAddressDTO;
-import com.fudy.shop.domain.user.UserAddress;
+import com.fudy.shop.domain.modal.user.UserAddress;
 import org.mapstruct.Mapper;
 
 import java.util.List;

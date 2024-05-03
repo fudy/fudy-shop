@@ -1,7 +1,7 @@
 package com.fudy.shop.domain.repository;
 
-import com.fudy.shop.domain.user.UserAddress;
-import com.fudy.shop.domain.user.UserId;
+import com.fudy.shop.domain.modal.user.UserAddress;
+import com.fudy.shop.domain.modal.user.UserId;
 
 import java.util.List;
 

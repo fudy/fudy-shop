@@ -1,4 +1,4 @@
-package com.fudy.shop.domain;
+package com.fudy.shop.domain.modal;
 
 import lombok.Data;
 

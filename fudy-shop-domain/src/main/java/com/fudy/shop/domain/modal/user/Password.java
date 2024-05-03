@@ -1,7 +1,6 @@
-package com.fudy.shop.domain.user;
+package com.fudy.shop.domain.modal.user;
 
 import com.fudy.shop.domain.util.SHA1Util;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 public class Password {

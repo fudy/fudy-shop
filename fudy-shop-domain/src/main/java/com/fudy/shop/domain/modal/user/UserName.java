@@ -1,12 +1,12 @@
-package com.fudy.shop.domain.user;
+package com.fudy.shop.domain.modal.user;
 
 import lombok.Getter;
 
-public class PhoneNumber {
+public class UserName {
     @Getter
     private final String value;
 
-    public PhoneNumber(String value) {
+    public UserName(String value) {
         this.value = value;
     }
 }

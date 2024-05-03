@@ -1,6 +1,6 @@
 package com.fudy.shop.domain.modal.item;
 
-import com.fudy.shop.domain.Entity;
+import com.fudy.shop.domain.modal.Entity;
 import lombok.Data;
 
 import java.math.BigDecimal;

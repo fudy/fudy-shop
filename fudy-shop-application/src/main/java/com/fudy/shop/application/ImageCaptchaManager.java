@@ -1,6 +1,6 @@
 package com.fudy.shop.application;
 
-import com.fudy.shop.domain.captcha.Captcha;
+import com.fudy.shop.domain.modal.captcha.Captcha;
 import com.fudy.shop.domain.util.RandomUtil;
 import org.apache.commons.codec.binary.StringUtils;
 import org.springframework.stereotype.Service;

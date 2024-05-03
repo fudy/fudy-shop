@@ -1,4 +1,4 @@
-package com.fudy.shop.domain.captcha;
+package com.fudy.shop.domain.modal.captcha;
 
 public enum CaptchaType {
     FORGET_PASSWORD("captcha-forget-password"),

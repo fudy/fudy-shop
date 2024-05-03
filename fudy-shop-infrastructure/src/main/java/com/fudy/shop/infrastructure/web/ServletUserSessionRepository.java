@@ -1,11 +1,11 @@
 package com.fudy.shop.infrastructure.web;
 
 import com.fudy.shop.domain.repository.UserSessionRepository;
-import com.fudy.shop.domain.user.NickName;
-import com.fudy.shop.domain.user.PhoneNumber;
-import com.fudy.shop.domain.user.UserId;
-import com.fudy.shop.domain.user.UserName;
-import com.fudy.shop.domain.user.session.UserSession;
+import com.fudy.shop.domain.modal.user.NickName;
+import com.fudy.shop.domain.modal.user.PhoneNumber;
+import com.fudy.shop.domain.modal.user.UserId;
+import com.fudy.shop.domain.modal.user.UserName;
+import com.fudy.shop.domain.modal.user.session.UserSession;
 
 import javax.servlet.http.HttpSession;
 

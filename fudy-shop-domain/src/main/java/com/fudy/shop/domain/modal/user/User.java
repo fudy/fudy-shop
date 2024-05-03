@@ -1,11 +1,9 @@
-package com.fudy.shop.domain.user;
+package com.fudy.shop.domain.modal.user;
 
-import com.fudy.shop.domain.Entity;
-import com.fudy.shop.domain.captcha.Captcha;
-import com.fudy.shop.domain.util.SHA1Util;
+import com.fudy.shop.domain.modal.Entity;
+import com.fudy.shop.domain.modal.captcha.Captcha;
 import lombok.Data;
 import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.codec.binary.StringUtils;
 
 import java.security.SecureRandom;
 import java.util.Random;

@@ -1,4 +1,4 @@
-package com.fudy.shop.domain.captcha;
+package com.fudy.shop.domain.modal.captcha;
 
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;

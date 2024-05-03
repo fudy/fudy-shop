@@ -1,7 +1,7 @@
 package com.fudy.shop.infrastructure.spring;
 
-import com.fudy.shop.domain.captcha.CaptchaSender;
-import com.fudy.shop.domain.captcha.CaptchaType;
+import com.fudy.shop.domain.modal.captcha.CaptchaSender;
+import com.fudy.shop.domain.modal.captcha.CaptchaType;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

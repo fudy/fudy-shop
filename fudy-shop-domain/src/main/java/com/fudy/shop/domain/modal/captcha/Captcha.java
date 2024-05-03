@@ -1,4 +1,4 @@
-package com.fudy.shop.domain.captcha;
+package com.fudy.shop.domain.modal.captcha;
 
 import com.fudy.shop.domain.util.RandomUtil;
 import lombok.Getter;

@@ -1,6 +1,6 @@
 package com.fudy.shop.domain.repository;
 
-import com.fudy.shop.domain.user.session.UserSession;
+import com.fudy.shop.domain.modal.user.session.UserSession;
 
 public interface UserSessionRepository {
 

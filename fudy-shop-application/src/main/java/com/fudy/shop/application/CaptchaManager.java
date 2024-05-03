@@ -2,7 +2,9 @@ package com.fudy.shop.application;
 
 import com.fudy.shop.application.dto.CaptchaDTO;
 import com.fudy.shop.domain.captcha.*;
-import com.fudy.shop.domain.user.PhoneNumber;
+import com.fudy.shop.domain.service.CaptchaService;
+import com.fudy.shop.domain.modal.captcha.CaptchaType;
+import com.fudy.shop.domain.modal.user.PhoneNumber;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

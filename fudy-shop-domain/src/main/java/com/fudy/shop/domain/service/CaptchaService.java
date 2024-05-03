@@ -1,8 +1,11 @@
-package com.fudy.shop.domain.captcha;
+package com.fudy.shop.domain.service;
 
-import com.fudy.shop.domain.cache.CachePrefix;
-import com.fudy.shop.domain.cache.CacheService;
-import com.fudy.shop.domain.user.PhoneNumber;
+import com.fudy.shop.domain.modal.cache.CachePrefix;
+import com.fudy.shop.domain.modal.captcha.Captcha;
+import com.fudy.shop.domain.modal.captcha.CaptchaFactory;
+import com.fudy.shop.domain.modal.captcha.CaptchaSender;
+import com.fudy.shop.domain.modal.captcha.CaptchaType;
+import com.fudy.shop.domain.modal.user.PhoneNumber;
 import com.fudy.shop.domain.util.RandomUtil;
 import org.apache.commons.codec.binary.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;

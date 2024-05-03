@@ -2,12 +2,13 @@ package com.fudy.shop.application;
 
 import com.fudy.shop.application.assembler.UserAssembler;
 import com.fudy.shop.application.dto.*;
-import com.fudy.shop.domain.cache.CachePrefix;
-import com.fudy.shop.domain.captcha.CaptchaService;
+import com.fudy.shop.domain.modal.cache.CachePrefix;
+import com.fudy.shop.domain.service.CaptchaService;
+import com.fudy.shop.domain.modal.user.*;
 import com.fudy.shop.domain.repository.UserSessionRepository;
 import com.fudy.shop.domain.repository.UserSessionRepositoryFactory;
-import com.fudy.shop.domain.user.*;
-import com.fudy.shop.domain.user.session.UserSession;
+import com.fudy.shop.domain.service.UserService;
+import com.fudy.shop.domain.modal.user.session.UserSession;
 import org.apache.commons.codec.binary.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

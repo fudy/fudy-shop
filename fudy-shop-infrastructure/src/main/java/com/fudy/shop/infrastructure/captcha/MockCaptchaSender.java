@@ -1,10 +1,10 @@
 package com.fudy.shop.infrastructure.captcha;
 
-import com.fudy.shop.domain.captcha.Captcha;
-import com.fudy.shop.domain.captcha.CaptchaSender;
-import com.fudy.shop.domain.cache.CachePrefix;
-import com.fudy.shop.domain.captcha.CaptchaType;
-import com.fudy.shop.domain.user.PhoneNumber;
+import com.fudy.shop.domain.modal.captcha.Captcha;
+import com.fudy.shop.domain.modal.captcha.CaptchaSender;
+import com.fudy.shop.domain.modal.cache.CachePrefix;
+import com.fudy.shop.domain.modal.captcha.CaptchaType;
+import com.fudy.shop.domain.modal.user.PhoneNumber;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

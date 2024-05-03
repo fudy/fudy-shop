@@ -1,6 +1,6 @@
-package com.fudy.shop.domain.user.session;
+package com.fudy.shop.domain.modal.user.session;
 
-import com.fudy.shop.domain.user.*;
+import com.fudy.shop.domain.modal.user.*;
 import lombok.Data;
 import lombok.NonNull;
 import lombok.experimental.Accessors;

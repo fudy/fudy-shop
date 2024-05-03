@@ -1,6 +1,6 @@
-package com.fudy.shop.domain.cache;
+package com.fudy.shop.domain.service;
 
-import com.fudy.shop.domain.cache.CachePrefix;
+import com.fudy.shop.domain.modal.cache.CachePrefix;
 
 import java.io.Serializable;
 

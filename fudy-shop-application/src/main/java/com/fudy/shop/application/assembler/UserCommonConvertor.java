@@ -1,6 +1,7 @@
 package com.fudy.shop.application.assembler;
 
-import com.fudy.shop.domain.captcha.Captcha;
+import com.fudy.shop.domain.modal.captcha.Captcha;
+import com.fudy.shop.domain.modal.user.*;
 import com.fudy.shop.domain.user.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

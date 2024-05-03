@@ -1,7 +1,7 @@
 package com.fudy.shop.infrastructure.db.convertor;
 
 import com.fudy.shop.application.assembler.UserCommonConvertor;
-import com.fudy.shop.domain.user.UserAddress;
+import com.fudy.shop.domain.modal.user.UserAddress;
 import com.fudy.shop.infrastructure.db.data.UserAddressDO;
 import org.mapstruct.Mapper;
 
