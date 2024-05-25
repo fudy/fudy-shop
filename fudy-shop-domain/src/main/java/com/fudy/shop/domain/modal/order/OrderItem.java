@@ -11,7 +11,7 @@ public class OrderItem extends Entity {
     /** 订单ID */
     private OrderID orderId;
     /** 商品 */
-    private ItemSku itemId;
+    private ItemSku itemSku;
     /** 数量 */
     private Integer quantity;
     /** 小计 */
