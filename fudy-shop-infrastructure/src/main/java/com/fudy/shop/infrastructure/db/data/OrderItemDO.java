@@ -9,6 +9,8 @@ public class OrderItemDO extends CommonDO {
     private Long orderId;
     /** 商品ID */
     private Long itemId;
+    /** sku */
+    private String sku;
     /** 数量 */
     private Integer quantity;
     /** 单价 */

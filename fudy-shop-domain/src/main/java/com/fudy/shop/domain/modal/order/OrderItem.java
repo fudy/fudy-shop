@@ -14,6 +14,8 @@ public class OrderItem extends Entity {
     private ItemSku itemSku;
     /** 数量 */
     private Integer quantity;
+    /** 单价 */
+    private BigDecimal unitPrice;
     /** 小计 */
     private BigDecimal subtotal;
 }

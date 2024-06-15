@@ -2,6 +2,7 @@ package com.fudy.shop.application;
 
 import com.fudy.shop.application.assembler.UserAssembler;
 import com.fudy.shop.application.dto.*;
+import com.fudy.shop.domain.exception.SessionNotFoundException;
 import com.fudy.shop.domain.modal.cache.CachePrefix;
 import com.fudy.shop.domain.service.CaptchaService;
 import com.fudy.shop.domain.modal.user.*;
@@ -98,5 +99,14 @@ public class UserManager  {
     public SimpleUserDTO getUser(HttpSession httpSession) {
         UserSession userSession = this.getUserSessionRepository(httpSession).getUserSession();
         return userAssembler.toSimpleUserDTO(userSession);
+    }
+
+    public String checkUser(HttpSession httpSession) throws Exception {
+        SimpleUserDTO user = this.getUser(httpSession);
+        if (null == user) {
+            throw new SessionNotFoundException("user session not found");
+        }
+        userService.checkUser(user.getId());
+        return user.getId();
     }
 }

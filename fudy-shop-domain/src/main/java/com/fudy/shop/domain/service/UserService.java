@@ -41,4 +41,7 @@ public class UserService {
         return user;
     }
 
+    public void checkUser(String userId) {
+        //TODO
+    }
 }
