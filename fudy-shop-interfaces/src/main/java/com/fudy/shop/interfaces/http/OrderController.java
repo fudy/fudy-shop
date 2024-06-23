@@ -6,6 +6,7 @@ import com.fudy.shop.application.dto.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
@@ -32,7 +33,7 @@ public class OrderController {
 
     /** 下单 */
     @PostMapping("/api/orders")
-    public Result<Void> placeOrder(CreateOrderCommand command) {
+    public Result<Void> placeOrder(@RequestBody  CreateOrderCommand command) {
         try {
             orderManager.placeOrder(httpSession, command);
             return Result.success(null);

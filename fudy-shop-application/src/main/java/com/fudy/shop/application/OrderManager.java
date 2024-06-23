@@ -39,8 +39,23 @@ public class OrderManager {
         return orderService.generateOrderID().getValue();
     }
 
+    private void validate(CreateOrderCommand command) throws Exception {
+        if (null == command) {
+            throw new Exception("command should not be null");
+        }
+        if (CollectionUtils.isEmpty(command.getOrderItemDTOList())) {
+            throw new Exception("order item list should not be null");
+        }
+        if (command.getActualAmount().intValue() < 1 || command.getActualAmount().intValue() > 1000 ) { //假设商品最大只能卖1000件
+            throw new Exception("actual amount should between 1 and 1000");
+        }
+        //其他n个参数的校验
+
+    }
+
     @Transactional
     public void placeOrder(HttpSession httpSession, CreateOrderCommand command) throws Exception {
+        validate(command);
         //用户校验
         String userId = userManager.checkUser(httpSession);
         Order order = assembler.toOrder(command);

@@ -4,6 +4,8 @@ import lombok.Data;
 
 @Data
 public class UserAddressDTO {
+    /** 地址id */
+    private Long id;
     /** 用户 */
     private Long userId;
     /** 收货人*/

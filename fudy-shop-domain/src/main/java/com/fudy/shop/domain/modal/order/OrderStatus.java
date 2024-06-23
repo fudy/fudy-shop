@@ -4,6 +4,7 @@ import lombok.Getter;
 
 @Getter
 public enum OrderStatus {
+    NEW("新建", 0),
     // 订单处理过程中出现异常，需要人工介入处理
     EXCEPTION("异常", 0),
     // 订单已创建，但客户尚未完成支付

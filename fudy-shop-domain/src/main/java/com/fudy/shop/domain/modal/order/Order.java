@@ -18,7 +18,7 @@ public class Order extends Entity {
     /** 用户ID */
     private UserId userId;
     /** 订单状态 */
-    private OrderStatus status;
+    private OrderStatus status = OrderStatus.NEW;
     /** 实际金额 */
     private BigDecimal actualAmount;
     /** 折扣金额 */

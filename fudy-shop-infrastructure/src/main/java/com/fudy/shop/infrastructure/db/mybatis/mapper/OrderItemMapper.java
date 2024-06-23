@@ -19,9 +19,9 @@ public interface OrderItemMapper {
     /** 批量插入 */
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     @Insert("<script> " +
-                "insert int order_item(" + NO_ID_COLUMNS + ") values " +
+                "insert into order_item(" + NO_ID_COLUMNS + ") values " +
                 "<foreach collection=\"orderItemDOList\" index=\"index\" item=\"item\" separator=\",\"> " +
-                    "(#{item.orderId}, #{item.itemId}, #{quantity}, #{unitPrice}, #{subtotal}, #{sku})" +
+                    "(now(), now(), #{item.orderId}, #{item.itemId}, #{item.quantity}, #{item.unitPrice}, #{item.subtotal}, #{item.sku})" +
                 "</foreach> " +
             "</script>")
     void batchInsert(@Param("orderItemDOList") List<OrderItemDO> orderItemDOList);
