@@ -27,4 +27,5 @@ public class Result<T> implements Serializable {
         result.setErrMsg(errMsg);
         return result;
     }
+
 }

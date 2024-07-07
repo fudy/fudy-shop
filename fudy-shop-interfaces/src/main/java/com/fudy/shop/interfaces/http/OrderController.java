@@ -3,6 +3,8 @@ package com.fudy.shop.interfaces.http;
 import com.fudy.shop.application.OrderManager;
 import com.fudy.shop.application.dto.command.CreateOrderCommand;
 import com.fudy.shop.application.dto.Result;
+import com.fudy.shop.domain.exception.ErrorCode;
+import com.fudy.shop.domain.exception.SessionNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,6 +27,8 @@ public class OrderController {
         try {
             Long orderID = orderManager.generateOrderID(httpSession);
             return Result.success(orderID);
+        } catch (SessionNotFoundException e) {
+            return Result.fail(ErrorCode.NOT_LOGIN.name());
         } catch (Exception e) {
             log.error(e.getMessage());
             return Result.fail(e.getMessage());

@@ -15,6 +15,9 @@ public interface UserAssembler {
     SimpleUserDTO toSimpleUserDTO(User user);
 
     default SimpleUserDTO toSimpleUserDTO(UserSession userSession) {
+        if (null == userSession) {
+            return null;
+        }
         SimpleUserDTO dto = new SimpleUserDTO();
         dto.setUserName(userSession.getUserName());
         dto.setId(null == userSession.getUserId() ? null : String.valueOf(userSession.getUserId()));

@@ -51,6 +51,9 @@ public class ServletUserSessionRepository implements UserSessionRepository {
 
     @Override
     public UserSession getUserSession() {
+        if(null == getUserName()) {
+            return null;
+        }
         UserSession userSession = new UserSession();
         userSession.setUserId(new UserId(getUserId()));
         userSession.setUserName(new UserName(getUserName()));
