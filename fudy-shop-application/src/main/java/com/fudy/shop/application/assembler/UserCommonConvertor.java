@@ -30,14 +30,6 @@ public class UserCommonConvertor {
         return new Captcha(captcha);
     }
 
-    public PasswordSalt toPasswordSalt(String salt) {
-        return new PasswordSalt(salt);
-    }
-
-    public String toPasswordSalt(PasswordSalt salt) {
-        return null == salt ? null : salt.getValue();
-    }
-
     public String toPhoneNumber(PhoneNumber phoneNumber) {
         return null == phoneNumber ? null : phoneNumber.getValue();
     }

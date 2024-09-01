@@ -53,7 +53,7 @@ public class UserManager  {
         if (!imageCaptchaManager.isValid(httpSession, dto.getImageCaptcha())) {
             throw new Exception("图片验证码不正确");
         }
-        User user = userService.login(new UserName(dto.getUserName()), new Password(dto.getPassword()));
+        User user = userService.login(new UserName(dto.getUsername()), new Password(dto.getPassword()));
         //将用户相关信息存到session中
         this.getUserSessionRepository(httpSession).save(new UserSession(user));
         imageCaptchaManager.clearImageCaptcha(httpSession);

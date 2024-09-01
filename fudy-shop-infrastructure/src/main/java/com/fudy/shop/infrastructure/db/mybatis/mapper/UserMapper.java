@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.*;
 import java.util.List;
 
 public interface UserMapper {
-    String NO_ID_COLUMNS = "created_time,modified_time,user_name,nick_name,password,phone,salt,avatar";
+    String NO_ID_COLUMNS = "created_time,modified_time,user_name,nick_name,password,phone,avatar";
     String COLUMNS = "id," + NO_ID_COLUMNS;
 
     @Select("select " + COLUMNS + " from user where user_name = #{userName}")
@@ -20,11 +20,11 @@ public interface UserMapper {
 
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     @Insert("insert into user("+NO_ID_COLUMNS+") values(now(), now(), #{userName}, #{nickName}, " +
-            "#{password}, #{phone}, #{salt}, #{avatar})")
+            "#{password}, #{phone}, #{avatar})")
     void insert(UserDO userDO);
 
     @Update("update user set modified_time=now(), nick_name=#{nickName}, password=#{password}, " +
-            "phone=#{phone}, salt=#{salt}, avatar=#{avatar} where user_name = #{userName}")
+            "phone=#{phone}, avatar=#{avatar} where user_name = #{userName}")
     void update(UserDO userDO);
 
     @Delete("delete from user where user_name = #{userName}")

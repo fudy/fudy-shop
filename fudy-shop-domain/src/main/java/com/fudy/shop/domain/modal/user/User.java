@@ -4,6 +4,7 @@ import com.fudy.shop.domain.modal.Entity;
 import com.fudy.shop.domain.modal.captcha.Captcha;
 import lombok.Data;
 import org.apache.commons.codec.binary.Base64;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.security.SecureRandom;
 import java.util.Random;
@@ -19,8 +20,6 @@ public class User extends Entity {
     private PhoneNumber phone;
 
     private Captcha captcha;
-    //用于密码加盐
-    private PasswordSalt salt;
 
     private Avatar avatar;
 
@@ -28,7 +27,7 @@ public class User extends Entity {
         if (!this.userName.equals(userName)) {
             return false;
         }
-        String encryptPassword = password.getEncryptedPassword(this.salt);
+        String encryptPassword = password.getValue();
         return this.password.getValue().equals(encryptPassword);
     }
 
@@ -36,16 +35,9 @@ public class User extends Entity {
         if (null == password) {
             return;
         }
-        this.salt = generateSalt();
-        password.encrypt(salt);
+        password.encrypt();
     }
 
-    private PasswordSalt generateSalt() {
-        final Random r = new SecureRandom();
-        byte[] salt = new byte[12];
-        r.nextBytes(salt);
-        return new PasswordSalt(Base64.encodeBase64String(salt));
-    }
 
     public boolean phoneNumberEquals(PhoneNumber phoneNumber) {
         if (null == this.phone || null == phoneNumber) {
