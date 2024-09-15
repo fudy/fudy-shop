@@ -23,6 +23,18 @@ public class User extends Entity {
 
     private Avatar avatar;
 
+    public String getPasswordValue() {
+        return null == password ? null: password.getValue();
+    }
+
+    public String getUsernameValue() {
+        return null == userName ? null : userName.getValue();
+    }
+
+    public String getAvatarValue() {
+        return null == avatar ? null : avatar.getValue();
+    }
+
     public boolean authenticate(UserName userName, Password password) {
         if (!this.userName.equals(userName)) {
             return false;

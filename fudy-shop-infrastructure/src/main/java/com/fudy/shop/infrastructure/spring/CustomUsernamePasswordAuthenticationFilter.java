@@ -1,6 +1,10 @@
 package com.fudy.shop.infrastructure.spring;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fudy.shop.application.ImageCaptchaManager;
+import com.fudy.shop.application.UserManager;
+import com.fudy.shop.application.dto.UserLoginDTO;
+import lombok.Setter;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -19,6 +23,12 @@ import java.util.Map;
 public class CustomUsernamePasswordAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
     private static final ObjectMapper objectMapper = new ObjectMapper();
+    private ImageCaptchaManager imageCaptchaManager;
+    private UserManager userManager;
+
+    public CustomUsernamePasswordAuthenticationFilter(UserManager userManager) {
+        this.userManager = userManager;
+    }
 
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
@@ -32,21 +42,14 @@ public class CustomUsernamePasswordAuthenticationFilter extends UsernamePassword
             throw new AuthenticationServiceException("Authentication method not supported: " + request.getMethod());
         }
         try {
-            Map<String, String> credentials = objectMapper.readValue(request.getInputStream(), Map.class);
-            String username = credentials.get("username");
-            String password = credentials.get("password");
-            if (username == null) {
-                throw new BadCredentialsException("Username is required");
-            }
-            if (password == null) {
-                throw new BadCredentialsException("Password is required");
-            }
-            UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(username, password);
+            UserLoginDTO dto = objectMapper.readValue(request.getInputStream(), UserLoginDTO.class);
+            userManager.checkValid(dto, request.getSession());
+            UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(dto.getUsername(), dto.getPassword());
             // Allow subclasses to set the "details" property
             setDetails(request, authRequest);
             return this.getAuthenticationManager().authenticate(authRequest);
-        } catch (IOException e) {
-            throw new BadCredentialsException("Invalid credentials", e);
+        } catch (Exception e) {
+            throw new BadCredentialsException(e.getMessage());
         }
     }
 }

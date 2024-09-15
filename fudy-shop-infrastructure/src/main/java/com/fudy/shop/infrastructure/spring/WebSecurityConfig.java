@@ -1,6 +1,8 @@
 package com.fudy.shop.infrastructure.spring;
 
 
+import com.fudy.shop.application.ImageCaptchaManager;
+import com.fudy.shop.application.UserManager;
 import com.fudy.shop.domain.modal.user.Password;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,8 @@ public class WebSecurityConfig {
     private CustomUserDetailsService customUserDetailsService;
     @Autowired
     private CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
+    @Autowired
+    private UserManager userManager;
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
@@ -59,13 +63,15 @@ public class WebSecurityConfig {
                             "/api/captcha",
                             "/api/image-captcha").permitAll()
                     .anyRequest().authenticated()
-            ).formLogin((form) -> form
+            )/*
+                .formLogin((form) -> form
                     .loginPage("http://localhost:3000/login")
-                    .loginProcessingUrl("/api/user/login")
+                    .loginProcessingUrl("/api/user/login").successHandler(new CustomAuthenticationSuccessHandler())
                     .successHandler(new ForwardAuthenticationSuccessHandler("/api/auth"))
                     .failureHandler(new ForwardAuthenticationFailureHandler("/api/auth"))
                     .permitAll()
-            ).logout((logout) -> logout
+            )*/
+                .logout((logout) -> logout
                     .logoutUrl("http://localhost:3000/logout")
                     .logoutSuccessUrl("/login?logout")
                     .invalidateHttpSession(true)
@@ -74,15 +80,14 @@ public class WebSecurityConfig {
                 .addFilterBefore(customUsernamePasswordAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .authenticationProvider(authenticationProvider());
         return http.build();
-
     }
 
-    private static CustomUsernamePasswordAuthenticationFilter getCustomUsernamePasswordAuthenticationFilter(AuthenticationManager authenticationManager) {
-        CustomUsernamePasswordAuthenticationFilter filter = new CustomUsernamePasswordAuthenticationFilter();
+    private CustomUsernamePasswordAuthenticationFilter getCustomUsernamePasswordAuthenticationFilter(AuthenticationManager authenticationManager) {
+        CustomUsernamePasswordAuthenticationFilter filter = new CustomUsernamePasswordAuthenticationFilter(userManager);
         //记得一定要设置这个url，不然自定义的filter不会被调用
         filter.setFilterProcessesUrl("/api/user/login");
         filter.setAuthenticationSuccessHandler(new CustomAuthenticationSuccessHandler());
-  //      filter.setAuthenticationFailureHandler(null); TODO
+        filter.setAuthenticationFailureHandler(new CustomAuthenticationFailureHandler());
         filter.setAuthenticationManager(authenticationManager);
         return filter;
     }

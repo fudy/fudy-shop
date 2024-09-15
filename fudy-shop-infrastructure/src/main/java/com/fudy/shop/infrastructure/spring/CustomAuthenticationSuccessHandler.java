@@ -24,9 +24,10 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         response.setContentType("application/json;charset=UTF-8");
         // 调用控制器中的方法
         try (PrintWriter out = response.getWriter()) {
-            User user = (User)authentication.getPrincipal();
+            CustomUserDetail user = (CustomUserDetail)authentication.getPrincipal();
             SimpleUserDTO userDTO = new SimpleUserDTO();
             userDTO.setUserName(user.getUsername());
+            userDTO.setAvatar(user.getAvatar());
             // 输出结果
             out.print(JSON.toJSONString(Result.success(userDTO)));
         }

@@ -10,6 +10,7 @@ import com.fudy.shop.domain.repository.UserSessionRepository;
 import com.fudy.shop.domain.repository.UserSessionRepositoryFactory;
 import com.fudy.shop.domain.service.UserService;
 import com.fudy.shop.domain.modal.user.session.UserSession;
+import lombok.NonNull;
 import org.apache.commons.codec.binary.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,6 +48,16 @@ public class UserManager  {
         User user = userAssembler.toUser(userDTO);
         user = userService.saveUser(user);
         return userAssembler.toUserDTO(user);
+    }
+
+    public void checkValid(@Valid UserLoginDTO dto, HttpSession httpSession) throws Exception {
+        if (!imageCaptchaManager.isValid(httpSession, dto.getImageCaptcha())) {
+            throw new Exception("图片验证码不正确");
+        }
+    }
+
+    public User findUser(@NonNull String userName) {
+        return userService.getUser(new UserName(userName));
     }
 
     public SimpleUserDTO login(@Valid UserLoginDTO dto, HttpSession httpSession) throws Exception {
