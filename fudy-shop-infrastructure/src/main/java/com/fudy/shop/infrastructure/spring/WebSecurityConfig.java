@@ -2,6 +2,7 @@ package com.fudy.shop.infrastructure.spring;
 
 
 import com.fudy.shop.domain.modal.user.Password;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.*;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -14,6 +15,8 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.security.web.authentication.ForwardAuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.ForwardAuthenticationFailureHandler;
 
 import java.time.Duration;
 import java.util.Arrays;
@@ -46,10 +49,7 @@ public class WebSecurityConfig {
     /** 认证授权配置，指定哪些url需要认证 */
     @Bean
     public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http, AuthenticationManager authenticationManager) throws Exception {
-        CustomUsernamePasswordAuthenticationFilter customUsernamePasswordAuthenticationFilter = new CustomUsernamePasswordAuthenticationFilter();
-        //记得一定要设置这个url，不然自定义的filter不会被调用
-        customUsernamePasswordAuthenticationFilter.setFilterProcessesUrl("/api/user/login");
-        customUsernamePasswordAuthenticationFilter.setAuthenticationManager(authenticationManager);
+        CustomUsernamePasswordAuthenticationFilter customUsernamePasswordAuthenticationFilter = getCustomUsernamePasswordAuthenticationFilter(authenticationManager);
 
         http.cors().configurationSource(corsConfigurationSource()).and() //在这里让cors配置生效
                 .csrf().disable().authorizeHttpRequests((requests) -> requests
@@ -62,8 +62,8 @@ public class WebSecurityConfig {
             ).formLogin((form) -> form
                     .loginPage("http://localhost:3000/login")
                     .loginProcessingUrl("/api/user/login")
-                    .defaultSuccessUrl("/login")
-                    .failureUrl("http://localhost:3000/login?error")
+                    .successHandler(new ForwardAuthenticationSuccessHandler("/api/auth"))
+                    .failureHandler(new ForwardAuthenticationFailureHandler("/api/auth"))
                     .permitAll()
             ).logout((logout) -> logout
                     .logoutUrl("http://localhost:3000/logout")
@@ -74,6 +74,17 @@ public class WebSecurityConfig {
                 .addFilterBefore(customUsernamePasswordAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .authenticationProvider(authenticationProvider());
         return http.build();
+
+    }
+
+    private static CustomUsernamePasswordAuthenticationFilter getCustomUsernamePasswordAuthenticationFilter(AuthenticationManager authenticationManager) {
+        CustomUsernamePasswordAuthenticationFilter filter = new CustomUsernamePasswordAuthenticationFilter();
+        //记得一定要设置这个url，不然自定义的filter不会被调用
+        filter.setFilterProcessesUrl("/api/user/login");
+        filter.setAuthenticationSuccessHandler(new CustomAuthenticationSuccessHandler());
+  //      filter.setAuthenticationFailureHandler(null); TODO
+        filter.setAuthenticationManager(authenticationManager);
+        return filter;
     }
 
     @Bean

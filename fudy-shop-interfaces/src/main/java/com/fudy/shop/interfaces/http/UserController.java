@@ -43,6 +43,17 @@ public class UserController {
         }
     }
 
+    @PostMapping("/api/auth")
+    public @ResponseBody Result<SimpleUserDTO> authSuccess(@RequestBody UserLoginDTO dto) {
+        try {
+            SimpleUserDTO data = userManager.login(dto, httpSession);
+            return Result.success(data);
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return Result.fail(e.getMessage());
+        }
+    }
+
     @PostMapping("/api/user/logout")
     public @ResponseBody Result<Void> login() {
         try {
