@@ -6,11 +6,15 @@ import lombok.Data;
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.io.Serializable;
 import java.security.SecureRandom;
 import java.util.Random;
 
 @Data
-public class User extends Entity {
+public class User extends Entity implements Serializable {
+
+    private static final long serialVersionUID = -99543818467394919L;
+
     private UserName userName;
 
     private NickName nickName;

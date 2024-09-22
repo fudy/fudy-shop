@@ -1,5 +1,6 @@
 package com.fudy.shop.infrastructure.spring;
 
+import com.fudy.shop.domain.modal.user.User;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -8,17 +9,14 @@ import java.util.Collection;
 
 public class CustomUserDetail implements UserDetails {
 
-    private String password;
-    private String username;
     @Getter
-    private String avatar;
+    private User user;
+
     @Getter
     private Collection<? extends GrantedAuthority> authorities;
 
-    public CustomUserDetail(String username, String password, String avatar, Collection<? extends GrantedAuthority> authorities) {
-        this.password = password;
-        this.username = username;
-        this.avatar = avatar;
+    public CustomUserDetail(User user, Collection<? extends GrantedAuthority> authorities) {
+        this.user = user;
         this.authorities = authorities;
     }
 
@@ -29,12 +27,12 @@ public class CustomUserDetail implements UserDetails {
 
     @Override
     public String getPassword() {
-        return password;
+        return user.getPasswordValue();
     }
 
     @Override
     public String getUsername() {
-        return username;
+        return user.getUsernameValue();
     }
 
     @Override

@@ -103,7 +103,7 @@ public class UserManager  {
         userService.saveUser(user);
     }
 
-    private UserSessionRepository getUserSessionRepository(HttpSession httpSession) {
+    public UserSessionRepository getUserSessionRepository(HttpSession httpSession) {
         return userSessionRepositoryFactory.newUserSessionRepository(httpSession);
     }
 

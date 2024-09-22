@@ -2,20 +2,24 @@ package com.fudy.shop.domain.modal.captcha;
 
 import com.fudy.shop.domain.util.RandomUtil;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 import java.util.Random;
 
-public class Captcha {
+public class Captcha implements Serializable {
+
     /** 验证码长度 */
     public static final int LENGTH = 4;
     /** 图片宽度 */
     public static final int WIDTH = 120;
     /** 图片长度 */
     public static final int HEIGHT = 40;
+    private static final long serialVersionUID = 2353133740612279598L;
 
-    @Getter
+    @Getter @Setter
     private final String code;
 
     public Captcha(String code) {

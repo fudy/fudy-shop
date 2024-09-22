@@ -3,6 +3,7 @@ package com.fudy.shop.infrastructure.spring;
 
 import com.fudy.shop.application.ImageCaptchaManager;
 import com.fudy.shop.application.UserManager;
+import com.fudy.shop.application.assembler.UserAssembler;
 import com.fudy.shop.domain.modal.user.Password;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,8 @@ public class WebSecurityConfig {
     private CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
     @Autowired
     private UserManager userManager;
+    @Autowired
+    private UserAssembler userAssembler;
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
@@ -86,7 +89,8 @@ public class WebSecurityConfig {
         CustomUsernamePasswordAuthenticationFilter filter = new CustomUsernamePasswordAuthenticationFilter(userManager);
         //记得一定要设置这个url，不然自定义的filter不会被调用
         filter.setFilterProcessesUrl("/api/user/login");
-        filter.setAuthenticationSuccessHandler(new CustomAuthenticationSuccessHandler());
+   //     filter.setAuthenticationSuccessHandler(new CustomAuthenticationSuccessHandler());
+        filter.setAuthenticationSuccessHandler(new CustomAuthenticationSuccessHandler(userAssembler, userManager));
         filter.setAuthenticationFailureHandler(new CustomAuthenticationFailureHandler());
         filter.setAuthenticationManager(authenticationManager);
         return filter;

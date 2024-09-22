@@ -28,7 +28,7 @@ public class CustomUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException("用户未注册");
         }
         // 返回一个实现了 UserDetails 接口的对象，例如：
-        return new CustomUserDetail(username, user.getPasswordValue(), user.getAvatarValue(), AuthorityUtils.createAuthorityList("USER"));
+        return new CustomUserDetail(user, AuthorityUtils.createAuthorityList("USER"));
     }
 
 }
